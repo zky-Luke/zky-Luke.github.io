@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>puppeteer新手入门(chromium下载跳坑) | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="puppeteer简介puppeteer 翻译是操纵木偶的人，利用这个工具，我们能做一个操纵页面的人。puppeteer是一个nodejs的库，支持调用Chrome的API来操纵Web，相比较Selenium或是PhantomJs,它最大的特点就是它的操作Dom可以完全在内存中进行模拟既在V8引擎中处理而不打开浏览器，而且关键是这个是Chrome团队在维护，会拥有更好的兼容性和前景。 puppet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="puppeteer新手入门(chromium下载跳坑)">
+<meta property="og:url" content="https://zky-luke.github.io/2017/12/27/Article2/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="puppeteer简介puppeteer 翻译是操纵木偶的人，利用这个工具，我们能做一个操纵页面的人。puppeteer是一个nodejs的库，支持调用Chrome的API来操纵Web，相比较Selenium或是PhantomJs,它最大的特点就是它的操作Dom可以完全在内存中进行模拟既在V8引擎中处理而不打开浏览器，而且关键是这个是Chrome团队在维护，会拥有更好的兼容性和前景。 puppet">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://zky-luke.github.io/2017/12/27/images/3.png">
+<meta property="og:updated_time" content="2019-06-20T02:47:03.664Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="puppeteer新手入门(chromium下载跳坑)">
+<meta name="twitter:description" content="puppeteer简介puppeteer 翻译是操纵木偶的人，利用这个工具，我们能做一个操纵页面的人。puppeteer是一个nodejs的库，支持调用Chrome的API来操纵Web，相比较Selenium或是PhantomJs,它最大的特点就是它的操作Dom可以完全在内存中进行模拟既在V8引擎中处理而不打开浏览器，而且关键是这个是Chrome团队在维护，会拥有更好的兼容性和前景。 puppet">
+<meta name="twitter:image" content="https://zky-luke.github.io/2017/12/27/images/3.png">
+  
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Dennis Yan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://segmentfault.com/u/luke_58aab11b996be/articles" target="_blank" class="nav-icn iconfont icon-segmentfault"></a>
+          
+        
+          
+            <a href="https://www.jianshu.com/u/74d1e2cb3a9e" target="_blank" class="nav-icn iconfont icon-jianshu"></a>
+          
+        
+          
+            <a href="https://github.com/zky-Luke" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">puppeteer新手入门(chromium下载跳坑)</h2>
+  <p class="sub">Dec 27, 2017</p>
+  <article class="content">
+    <h1 id="puppeteer简介"><a href="#puppeteer简介" class="headerlink" title="puppeteer简介"></a>puppeteer简介</h1><p>puppeteer 翻译是操纵木偶的人，利用这个工具，我们能做一个操纵页面的人。puppeteer是一个nodejs的库，支持调用Chrome的API来操纵Web，相比较Selenium或是PhantomJs,它最大的特点就是它的操作Dom可以完全在内存中进行模拟既在V8引擎中处理而不打开浏览器，而且关键是这个是Chrome团队在维护，会拥有更好的兼容性和前景。</p>
+<h1 id="puppeteer功能"><a href="#puppeteer功能" class="headerlink" title="puppeteer功能"></a>puppeteer功能</h1><ul>
+<li>生成页面的截图和PDF。</li>
+<li>抓取SPA并生成预先呈现的内容（即“SSR”）。</li>
+<li>从网站抓取你需要的内容。</li>
+<li>自动表单提交，UI测试，键盘输入等</li>
+<li>创建一个最新的自动化测试环境。使用最新的JavaScript和浏览器功能，直接在最新版本的Chrome中运行测试。</li>
+<li>捕获您的网站的时间线跟踪，以帮助诊断性能问题。</li>
+</ul>
+<h1 id="puppeteer轻松入门"><a href="#puppeteer轻松入门" class="headerlink" title="puppeteer轻松入门"></a>puppeteer轻松入门</h1><h4 id="1-环境和安装"><a href="#1-环境和安装" class="headerlink" title="1. 环境和安装"></a>1. 环境和安装</h4><p>Puppeteer 至少需要 Node v6.4.0，如要使用 async / await，只有 Node v7.6.0 或更高版本才支持。 node下载地址： <a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">https://nodejs.org/zh-cn/</a></p>
+<h4 id="2-创建项目"><a href="#2-创建项目" class="headerlink" title="2. 创建项目"></a>2. 创建项目</h4><h6 id="2-1-创建test目录，进入目录执行npm-init"><a href="#2-1-创建test目录，进入目录执行npm-init" class="headerlink" title="2.1 创建test目录，进入目录执行npm init"></a>2.1 创建test目录，进入目录执行npm init</h6><h6 id="2-2-安装-puppeteer"><a href="#2-2-安装-puppeteer" class="headerlink" title="2.2 安装 puppeteer"></a>2.2 安装 puppeteer</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add puppeteer 或者 npm i puppeteer</span><br></pre></td></tr></table></figure>
+<p>可能会出现以下报错:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ERROR: Failed to download Chromium r515411! Set &quot;PUPPETEER_SKIP_CHROMIUM_DOWNLOA</span><br><span class="line">D&quot; env variable to skip download.</span><br></pre></td></tr></table></figure></p>
+<p>是因为在执行安装的过程中需要执行install.js，这里会下载Chromium,官网建议是进行跳过，我们可以执行 —ignore-scripts 忽略这个js执行。也可以通过设置环境变量set PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1阻止下载 Chromium （因为封网，直接下载会失败）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i --save puppeteer --ignore-scripts</span><br></pre></td></tr></table></figure>
+<h6 id="2-3-手动下载Chromium"><a href="#2-3-手动下载Chromium" class="headerlink" title="2.3 手动下载Chromium"></a>2.3 手动下载Chromium</h6><p>下载地址：<a href="https://download-chromium.appspot.com/" target="_blank" rel="noopener">https://download-chromium.appspot.com/</a>  (打开蓝灯翻墙软件…)</p>
+<p>把下载刚刚下载的文件解压出来会有chrome-win32文件夹，把里面的文件拷贝到项目新建的chromium文件夹中</p>
+<h6 id="2-4-新建index-js（截图功能）-代码如下："><a href="#2-4-新建index-js（截图功能）-代码如下：" class="headerlink" title="2.4 新建index.js（截图功能）, 代码如下："></a>2.4 新建index.js（截图功能）, 代码如下：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const puppeteer = require(&apos;puppeteer&apos;);</span><br><span class="line"></span><br><span class="line">(async () =&gt; &#123;</span><br><span class="line">    const browser = await puppeteer.launch();</span><br><span class="line">    const page = await browser.newPage();</span><br><span class="line">    await page.goto(&apos;https://y.qq.com&apos;);</span><br><span class="line">    await page.screenshot(&#123;path: &apos;yqq.png&apos;&#125;);</span><br><span class="line">    browser.close();</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p>打开cmd执行index.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node index.js</span><br></pre></td></tr></table></figure></p>
+<p>这时候可能出现以下错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(node:8672) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejec</span><br><span class="line">tion id: 1): AssertionError [ERR_ASSERTION]: Chromium revision is not downloaded</span><br><span class="line">. Run &quot;npm install&quot;</span><br><span class="line">(node:8672) [DEP0018] DeprecationWarning: Unhandled promise rejections are depre</span><br><span class="line">cated. In the future, promise rejections that are not handled will terminate the</span><br><span class="line"> Node.js process with a non-zero exit code.</span><br></pre></td></tr></table></figure></p>
+<p>显示chromium 未下载错误，因为chromium默认的下载路径是在node_modules/puppeteer/.local-chromium/目录，这时候我们的chromium是在项目根目录，所以需要配置指定路径，修改index.js文件()：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const puppeteer = require(&apos;puppeteer&apos;);</span><br><span class="line"></span><br><span class="line">(async () =&gt; &#123;</span><br><span class="line">      const browser = await puppeteer.launch(&#123;</span><br><span class="line">        executablePath: &apos;./chromium/chrome.exe&apos;,</span><br><span class="line">        headless: false</span><br><span class="line">      &#125;);</span><br><span class="line">      const page = await browser.newPage();</span><br><span class="line">      await page.goto(&apos;http://music.163.com/&apos;);</span><br><span class="line">      await page.screenshot(&#123;path: &apos;music.png&apos;&#125;);</span><br><span class="line">      browser.close();</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<p>puppeteer launch参数说明：</p>
+<ul>
+<li>executablePath： 运行Chromium或Chrome可执行文件的路径</li>
+<li>headless： 是否运行在浏览器headless模式，true为不打开浏览器执行，默认为true</li>
+<li>timeout： 等待浏览器实例启动的最长时间（以毫秒为单位）。默认为30000（30秒）。通过0禁用超时</li>
+<li>args： 传递给浏览器实例的其他参数</li>
+</ul>
+<p>更多参数请参照<a href="https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#class-browser" target="_blank" rel="noopener">官网</a>，再次执行index.js可能出现以下错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: Protocol error (Page.getFrameTree): &apos;Page.getFrameTree&apos; wasn &apos;t found undefined</span><br></pre></td></tr></table></figure></p>
+<p>刚开始找了好久没找到答案，然后上万能的Google找了下，发现了类似的问题<br><img src="http://upload-images.jianshu.io/upload_images/7075647-7451fb48095d39d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>可能是chromium的版本存在差异，然后重新在<a href="https://download-chromium.appspot.com/" target="_blank" rel="noopener">chromium官网</a>下载最新版本解压到项目（要注意下相应系统chromium）</p>
+<p>执行index.js， 脚本运行chromium浏览器跳转到界面，截图保存到项目中，这样就成功了…</p>
+<h6 id="2-5-puppeteer相关地址"><a href="#2-5-puppeteer相关地址" class="headerlink" title="2.5 puppeteer相关地址"></a>2.5 puppeteer相关地址</h6><p><a href="https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#class-browser" target="_blank" rel="noopener">puppeteer神器官方文档</a>，可以进行其他强大的功能开发…</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2019/03/06/Article1/" class="link f-fl">⟵SSH Git多账号配置 一分钟上手</a>
+    
+    
+      <a href="/2017/07/28/Article4/" class="link f-fr">构建自己的npm包 简单实现⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  1062479924@qq.com
+  
+    
+      
+        · <a href="https://segmentfault.com/u/luke_58aab11b996be/articles" target="_blank" class="nav-icn">Segmentfault</a>
+      
+    
+      
+        · <a href="https://www.jianshu.com/u/74d1e2cb3a9e" target="_blank" class="nav-icn">Jianshu</a>
+      
+    
+      
+        · <a href="https://github.com/zky-Luke" target="_blank" class="nav-icn">Github</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Dennis Yan</span>
+</footer>
+  </div>
+</body>
+</html>

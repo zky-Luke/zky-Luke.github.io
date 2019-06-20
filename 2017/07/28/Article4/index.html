@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>构建自己的npm包 简单实现 | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="NPM 使用介绍NPM是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种：  允许用户从NPM服务器下载别人编写的第三方包到本地使用。 允许用户从NPM服务器下载并安装别人编写的命令行程序到本地使用。 允许用户将自己编写的包或命令行程序上传到NPM服务器供别人使用。  NPM 包构建1. 创建demo目录，新建index.js文件index.j">
+<meta property="og:type" content="article">
+<meta property="og:title" content="构建自己的npm包 简单实现">
+<meta property="og:url" content="https://zky-luke.github.io/2017/07/28/Article4/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="NPM 使用介绍NPM是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种：  允许用户从NPM服务器下载别人编写的第三方包到本地使用。 允许用户从NPM服务器下载并安装别人编写的命令行程序到本地使用。 允许用户将自己编写的包或命令行程序上传到NPM服务器供别人使用。  NPM 包构建1. 创建demo目录，新建index.js文件index.j">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://zky-luke.github.io/2017/07/28/images/1.png">
+<meta property="og:updated_time" content="2019-06-20T02:47:03.666Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="构建自己的npm包 简单实现">
+<meta name="twitter:description" content="NPM 使用介绍NPM是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种：  允许用户从NPM服务器下载别人编写的第三方包到本地使用。 允许用户从NPM服务器下载并安装别人编写的命令行程序到本地使用。 允许用户将自己编写的包或命令行程序上传到NPM服务器供别人使用。  NPM 包构建1. 创建demo目录，新建index.js文件index.j">
+<meta name="twitter:image" content="https://zky-luke.github.io/2017/07/28/images/1.png">
+  
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Dennis Yan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://segmentfault.com/u/luke_58aab11b996be/articles" target="_blank" class="nav-icn iconfont icon-segmentfault"></a>
+          
+        
+          
+            <a href="https://www.jianshu.com/u/74d1e2cb3a9e" target="_blank" class="nav-icn iconfont icon-jianshu"></a>
+          
+        
+          
+            <a href="https://github.com/zky-Luke" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">构建自己的npm包 简单实现</h2>
+  <p class="sub">Jul 28, 2017</p>
+  <article class="content">
+    <h1 id="NPM-使用介绍"><a href="#NPM-使用介绍" class="headerlink" title="NPM 使用介绍"></a>NPM 使用介绍</h1><p>NPM是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种：</p>
+<ul>
+<li>允许用户从NPM服务器下载别人编写的第三方包到本地使用。</li>
+<li>允许用户从NPM服务器下载并安装别人编写的命令行程序到本地使用。</li>
+<li>允许用户将自己编写的包或命令行程序上传到NPM服务器供别人使用。</li>
+</ul>
+<h1 id="NPM-包构建"><a href="#NPM-包构建" class="headerlink" title="NPM 包构建"></a>NPM 包构建</h1><h6 id="1-创建demo目录，新建index-js文件"><a href="#1-创建demo目录，新建index-js文件" class="headerlink" title="1. 创建demo目录，新建index.js文件"></a>1. 创建demo目录，新建index.js文件</h6><p>index.js文件示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module.exports.sayHello = function()&#123;</span><br><span class="line">	return &quot;Hello World!&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h6 id="2-在项目中引导创建一个package-json文件"><a href="#2-在项目中引导创建一个package-json文件" class="headerlink" title="2.在项目中引导创建一个package.json文件"></a>2.在项目中引导创建一个package.json文件</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
+<p>快速创建可以使用npm init -y命令</p>
+<h1 id="注册npm账号"><a href="#注册npm账号" class="headerlink" title="注册npm账号"></a>注册npm账号</h1><h6 id="1-要发布npm包当然需要在npm官网注册一个属于自己的账号"><a href="#1-要发布npm包当然需要在npm官网注册一个属于自己的账号" class="headerlink" title="1.要发布npm包当然需要在npm官网注册一个属于自己的账号"></a>1.要发布npm包当然需要在npm官网注册一个属于自己的账号</h6><p>npm官网地址：  <a href="https://www.npmjs.com" target="_blank" rel="noopener">https://www.npmjs.com</a></p>
+<h6 id="2-在cmd中登录账号"><a href="#2-在cmd中登录账号" class="headerlink" title="2. 在cmd中登录账号"></a>2. 在cmd中登录账号</h6><p>注册成功后，打开cmd进入到demo目录，登录账号：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm login</span><br></pre></td></tr></table></figure></p>
+<p>输入用户密码以及邮箱，登录成功后可以输入查询命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm whoami</span><br></pre></td></tr></table></figure></p>
+<p>就能看到你酷酷的账号名了~~</p>
+<p>附：刚注册完有段时间可以发布npm包，过段时间需要邮箱验证通过才能发布包，不然会报错（无伤大雅~~）</p>
+<h1 id="上传npm包"><a href="#上传npm包" class="headerlink" title="上传npm包"></a>上传npm包</h1><h6 id="1-cmd进到demo目录，输入如下命令："><a href="#1-cmd进到demo目录，输入如下命令：" class="headerlink" title="1. cmd进到demo目录，输入如下命令："></a>1. cmd进到demo目录，输入如下命令：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm publish</span><br></pre></td></tr></table></figure>
+<p>这时候npm报错大军要来了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm ERR! publish Failed PUT 403</span><br><span class="line">npm ERR! code E403</span><br><span class="line">npm ERR! you do not have permission to publish &quot;demo&quot;. Are you logged in as the</span><br><span class="line">correct user? : demo</span><br></pre></td></tr></table></figure></p>
+<p>这是什么原因？？就是与npm仓库的包名重复了</p>
+<p>改改改~~<br>拿出package.json文件，把name字段值改成下面：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;name&quot;: &quot;testfun&quot;</span><br></pre></td></tr></table></figure></p>
+<p>注意<strong>你的name字段值不要跟我一样</strong>，不然还会包上述错误，避免相同包名就可以啦</p>
+<p><strong>还有一点要注意的是npm对包名的限制：不能有大写字母/空格/下滑线</strong></p>
+<p>上传成功后你就可以在npm官网看到：<br><img src="http://upload-images.jianshu.io/upload_images/7075647-c4f054cb9c234205.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="pic.png"></p>
+<h1 id="npm包管理"><a href="#npm包管理" class="headerlink" title="npm包管理"></a>npm包管理</h1><h6 id="1-管理npm包权限"><a href="#1-管理npm包权限" class="headerlink" title="1. 管理npm包权限"></a>1. 管理npm包权限</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">查看模块拥有者 </span><br><span class="line">$ npm owner ls &lt;package_name&gt; </span><br><span class="line">添加发布者 </span><br><span class="line">$ npm owner add &lt;user&gt; &lt;package_name&gt; </span><br><span class="line">删除发布者 </span><br><span class="line">$ npm owner rm &lt;user&gt; &lt;package_name&gt;</span><br></pre></td></tr></table></figure>
+<h6 id="2-撤销发布包-在项目目录下执行"><a href="#2-撤销发布包-在项目目录下执行" class="headerlink" title="2. 撤销发布包( 在项目目录下执行 )"></a>2. 撤销发布包( 在项目目录下执行 )</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm unpublish --force</span><br></pre></td></tr></table></figure>
+<p>主要是处于安全性考虑，在Azer NPM 撤包事件后，npm公布了一版新的规则，如下：</p>
+<ul>
+<li>版本更新少于24小时的包允许下架；</li>
+<li>超过24小时的包的下架需要联系npm维护者；</li>
+<li>如果有npm维护者参与，npm将检查是否有其他包依赖该包，如果有则不允下架；</li>
+<li>如果某个包的所有版本都被移除，npm会上传一个空的占位包，以防后来的使用者不小心引用怀有恶意的替代者。</li>
+</ul>
+<h6 id="3-npm的版本控制"><a href="#3-npm的版本控制" class="headerlink" title="3. npm的版本控制"></a>3. npm的版本控制</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm version patch</span><br><span class="line">npm version minor</span><br><span class="line">npm version major</span><br></pre></td></tr></table></figure>
+<p>例如：我原本的项目是1.0.0版本的话<br>若是1中情况，变为1.0.1<br>若是2中情况，变为1.1.0<br>若是3中情况，变为2.0.0</p>
+<p>不过也可以在package.json中的version更改~~</p>
+<h1 id="使用npm包"><a href="#使用npm包" class="headerlink" title="使用npm包"></a>使用npm包</h1><h6 id="1-创建test目录，在目录中新建index-js及package-json文件"><a href="#1-创建test目录，在目录中新建index-js及package-json文件" class="headerlink" title="1. 创建test目录，在目录中新建index.js及package.json文件"></a>1. 创建test目录，在目录中新建index.js及package.json文件</h6><p>index.js文件代码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var testfun = require(&quot;testfun&quot;);</span><br><span class="line">console.log(testfun.sayHello());</span><br></pre></td></tr></table></figure></p>
+<h6 id="2-安装testfun包"><a href="#2-安装testfun包" class="headerlink" title="2. 安装testfun包"></a>2. 安装testfun包</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev testfun</span><br></pre></td></tr></table></figure>
+<h6 id="3-在项目目录中cmd输入"><a href="#3-在项目目录中cmd输入" class="headerlink" title="3. 在项目目录中cmd输入"></a>3. 在项目目录中cmd输入</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node index.js</span><br></pre></td></tr></table></figure>
+<p>就可以看到下面的效果啦~</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7075647-346f8b8a146b4ab2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="pic.png"></p>
+<p>这是运行在node环境，那么像运行在浏览器该怎么弄呢~~<br>这时候就要用到browserify了</p>
+<h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><h3 id="Browserify"><a href="#Browserify" class="headerlink" title="Browserify"></a>Browserify</h3><h6 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h6><p>Browserify 可以让你使用类似于 node 的 require() 的方式来组织浏览器端的 Javascript 代码，通过<a href="https://baike.baidu.com/item/%E9%A2%84%E7%BC%96%E8%AF%91/3191547" target="_blank" rel="noopener">预编译</a>让前端 Javascript 可以直接使用 Node NPM 安装的一些库。</p>
+<h6 id="2-Browserify是如何工作的"><a href="#2-Browserify是如何工作的" class="headerlink" title="2.Browserify是如何工作的"></a>2.Browserify是如何工作的</h6><ul>
+<li>Browserify从你给你的入口文件开始,寻找所有调用require()方法的地方, 然后沿着<a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree" target="_blank" rel="noopener">抽象语法树</a>,通过 <a href="https://www.npmjs.com/package/detective" target="_blank" rel="noopener">detective</a> 模块来找到所有请求的模块.</li>
+<li>每一个require()调用里都传入一个字符串作为参数,browserify把这个字符串解析成文件的路径然后递归的查找文件直到整个依赖树都被找到.</li>
+<li>每个被require()的文件,它的名字都会被映射到内部的id,最后被整合到一个javascript文件中.</li>
+</ul>
+<h6 id="3-运用到项目"><a href="#3-运用到项目" class="headerlink" title="3. 运用到项目"></a>3. 运用到项目</h6><ul>
+<li><p>全局安装browserify</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g browserify</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用browserify</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">browserify index.js &gt; bundle.js</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在test目录新建index.html,引入以下js文件:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;bundle.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>打开index.html就可以看到控制器中的效果啦，这样就用有自己的npm包了(＾ω＾)~~</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/12/27/Article2/" class="link f-fl">⟵puppeteer新手入门(chromium下载跳坑)</a>
+    
+    
+      <a href="/2017/07/26/Article3/" class="link f-fr">Electron 快速入门及打包⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  1062479924@qq.com
+  
+    
+      
+        · <a href="https://segmentfault.com/u/luke_58aab11b996be/articles" target="_blank" class="nav-icn">Segmentfault</a>
+      
+    
+      
+        · <a href="https://www.jianshu.com/u/74d1e2cb3a9e" target="_blank" class="nav-icn">Jianshu</a>
+      
+    
+      
+        · <a href="https://github.com/zky-Luke" target="_blank" class="nav-icn">Github</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Dennis Yan</span>
+</footer>
+  </div>
+</body>
+</html>
