@@ -5,18 +5,18 @@
   
   <title>SSH Git多账号配置 一分钟上手 | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="使用介绍默认情况下，一台电脑只有一个SSH Key，假如我们有多个Github账号，需要将代码迁移账号，这时候这篇文章就派上用场啦~">
+  <meta name="description" content="使用介绍默认情况下，一台电脑只有一个SSH Key，假如我们有多个Github账号，需要将代码迁移账号，这时候这篇文章就派上用场啦~ 简单上手1.生成秘钥公钥装好Git后，桌面右键点击Git Bash进入Git界面，输入以下命令：12345//切换到ssh目录cd ~/.ssh//新建两个账户的ssh-keyssh-keygen -t rsa -C 10000@qq.comssh-keygen -">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SSH Git多账号配置 一分钟上手">
 <meta property="og:url" content="https://zky-luke.github.io/2019/03/06/Article1/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="使用介绍默认情况下，一台电脑只有一个SSH Key，假如我们有多个Github账号，需要将代码迁移账号，这时候这篇文章就派上用场啦~">
+<meta property="og:description" content="使用介绍默认情况下，一台电脑只有一个SSH Key，假如我们有多个Github账号，需要将代码迁移账号，这时候这篇文章就派上用场啦~ 简单上手1.生成秘钥公钥装好Git后，桌面右键点击Git Bash进入Git界面，输入以下命令：12345//切换到ssh目录cd ~/.ssh//新建两个账户的ssh-keyssh-keygen -t rsa -C 10000@qq.comssh-keygen -">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://zky-luke.github.io/2019/03/06/images/4.png">
-<meta property="og:updated_time" content="2019-06-20T08:22:28.755Z">
+<meta property="og:updated_time" content="2019-06-20T08:24:23.984Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSH Git多账号配置 一分钟上手">
-<meta name="twitter:description" content="使用介绍默认情况下，一台电脑只有一个SSH Key，假如我们有多个Github账号，需要将代码迁移账号，这时候这篇文章就派上用场啦~">
+<meta name="twitter:description" content="使用介绍默认情况下，一台电脑只有一个SSH Key，假如我们有多个Github账号，需要将代码迁移账号，这时候这篇文章就派上用场啦~ 简单上手1.生成秘钥公钥装好Git后，桌面右键点击Git Bash进入Git界面，输入以下命令：12345//切换到ssh目录cd ~/.ssh//新建两个账户的ssh-keyssh-keygen -t rsa -C 10000@qq.comssh-keygen -">
 <meta name="twitter:image" content="https://zky-luke.github.io/2019/03/06/images/4.png">
   
     <link rel="icon" href="/images/favicon.ico">
@@ -74,6 +74,21 @@
   <p class="sub">Mar 6, 2019</p>
   <article class="content">
     <h1 id="使用介绍"><a href="#使用介绍" class="headerlink" title="使用介绍"></a>使用介绍</h1><p>默认情况下，一台电脑只有一个SSH Key，假如我们有多个Github账号，需要将代码迁移账号，这时候这篇文章就派上用场啦~</p>
+<h1 id="简单上手"><a href="#简单上手" class="headerlink" title="简单上手"></a>简单上手</h1><h6 id="1-生成秘钥公钥"><a href="#1-生成秘钥公钥" class="headerlink" title="1.生成秘钥公钥"></a>1.生成秘钥公钥</h6><p>装好Git后，桌面右键点击Git Bash进入Git界面，输入以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//切换到ssh目录</span><br><span class="line">cd ~/.ssh</span><br><span class="line">//新建两个账户的ssh-key</span><br><span class="line">ssh-keygen -t rsa -C 10000@qq.com</span><br><span class="line">ssh-keygen -t rsa -C 20000@qq.com</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/7075647-2be50bd4387788a6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/7075647-9e392d27302b71e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="5.png"></p>
+<p>上面先填写Git账户的ssh-key的名称（默认是id_rsa）,下一步则是填写密码及确认密码，不需要密码的话可以直接回车即可。<br>在ssh文件夹已经生成文件，如下<br><img src="https://upload-images.jianshu.io/upload_images/7075647-889e6237b1584b44.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="6.png"></p>
+<h6 id="2-查看秘钥并放到Github账户"><a href="#2-查看秘钥并放到Github账户" class="headerlink" title="2.查看秘钥并放到Github账户"></a>2.查看秘钥并放到Github账户</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 查看秘钥</span><br><span class="line">cat id_rsa_test.pub</span><br><span class="line">cat id_rsa_test2.pub</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/7075647-1923a9f9a778a401.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3.png"><br>分别添加到两个github账户，详细步骤百度大大搜一搜哈</p>
+<h6 id="3-在ssh目录下创建config并配置"><a href="#3-在ssh目录下创建config并配置" class="headerlink" title="3.在ssh目录下创建config并配置"></a>3.在ssh目录下创建config并配置</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 创建config</span><br><span class="line">touch config</span><br><span class="line">// 查看当前目录</span><br><span class="line">ls</span><br><span class="line">// 编辑config</span><br><span class="line">vim config</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/7075647-56341443598f11f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 配置github.com</span><br><span class="line">Host github.com    // 自定义域名地址</span><br><span class="line">    HostName github.com   // 真实域名地址</span><br><span class="line">    IdentityFile C:\Users\Admin\.ssh\id_rsa_test    // id_rsa位置</span><br><span class="line">    PreferredAuthentications publickey    // 权限验证</span><br><span class="line">    User username1    // 用户名</span><br><span class="line"></span><br><span class="line"># 配置git.github2.com </span><br><span class="line">Host github2.com </span><br><span class="line">    HostName github.com</span><br><span class="line">    IdentityFile C:\Users\Admin\.ssh\id_rsa_test2</span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line">    User username2</span><br></pre></td></tr></table></figure>
+<p>写入如上配置，域名和id_rsa位置要根据实际情况填写，然后保存即可。</p>
+<h6 id="4-测试是否配置成功"><a href="#4-测试是否配置成功" class="headerlink" title="4.测试是否配置成功"></a>4.测试是否配置成功</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 测试配置</span><br><span class="line">ssh -T git@github.com</span><br><span class="line">ssh -T git@github2.com</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/7075647-204eb3988e0cb25a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="8.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/7075647-eb00bd946aaae267.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="9.png"><br>出现上图所示，则表示成功啦~~</p>
+<h1 id="项目迁移"><a href="#项目迁移" class="headerlink" title="项目迁移"></a>项目迁移</h1><p>假如有个旧账号的项目要迁移到新账号，先把旧账号项目的代码克隆下来，在新账号新建个项目，在cmd添加远程仓库的ssh并命名为origin2,使用如下命令强制提交代码，就ok了，好嗨~<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin2 master -f</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/7075647-e0c398d5f591cf3b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="10.png"></p>
 
   </article>
   <footer class="f-cf">
