@@ -1,124 +1,542 @@
 <!DOCTYPE html>
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
-  
-  <title>SSH Git多账号配置 一分钟上手 | Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="使用介绍默认情况下，一台电脑只有一个SSH Key，假如我们有多个Github账号，需要将代码迁移账号，这时候这篇文章就派上用场啦~ 简单上手1.生成秘钥公钥装好Git后，桌面右键点击Git Bash进入Git界面，输入以下命令：12345//切换到ssh目录cd ~/.ssh//新建两个账户的ssh-keyssh-keygen -t rsa -C 10000@qq.comssh-keygen -">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>SSH Git多账号配置 一分钟上手 | Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="SSH,Git">
+    <meta name="description" content="使用介绍默认情况下，一台电脑只有一个SSH Key，假如我们有多个Github账号，需要将代码迁移账号，这时候这篇文章就派上用场啦~ 简单上手一、生成秘钥公钥装好Git后，桌面右键点击Git Bash进入Git界面，输入以下命令：12345//切换到ssh目录cd ~/.ssh//新建两个账户的ssh-keyssh-keygen -t rsa -C 10000@qq.comssh-keygen -">
+<meta name="keywords" content="SSH,Git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SSH Git多账号配置 一分钟上手">
 <meta property="og:url" content="https://zky-luke.github.io/2019/03/06/Article1/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="使用介绍默认情况下，一台电脑只有一个SSH Key，假如我们有多个Github账号，需要将代码迁移账号，这时候这篇文章就派上用场啦~ 简单上手1.生成秘钥公钥装好Git后，桌面右键点击Git Bash进入Git界面，输入以下命令：12345//切换到ssh目录cd ~/.ssh//新建两个账户的ssh-keyssh-keygen -t rsa -C 10000@qq.comssh-keygen -">
-<meta property="og:locale" content="default">
-<meta property="og:image" content="https://zky-luke.github.io/2019/03/06/images/4.png">
-<meta property="og:updated_time" content="2019-06-20T08:24:23.984Z">
+<meta property="og:description" content="使用介绍默认情况下，一台电脑只有一个SSH Key，假如我们有多个Github账号，需要将代码迁移账号，这时候这篇文章就派上用场啦~ 简单上手一、生成秘钥公钥装好Git后，桌面右键点击Git Bash进入Git界面，输入以下命令：12345//切换到ssh目录cd ~/.ssh//新建两个账户的ssh-keyssh-keygen -t rsa -C 10000@qq.comssh-keygen -">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://thumbnail0.baidupcs.com/thumbnail/6ebce21c0f2684da94a1b0b3e68389f2?fid=3360643507-250528-482866487959044&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-fFd6U9hnDdHp7f5iVudaw1wp668%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3981973583525071722&dp-callid=0&time=1561104000&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1">
+<meta property="og:image" content="https://thumbnail0.baidupcs.com/thumbnail/493baedde40fedbf0316a31c4d98cfe3?fid=3360643507-250528-227889363012651&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-g%2bJiu8zMmQhxQ6R2FuRSgvU%2fav8%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3981973583525071722&dp-callid=0&time=1561104000&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1">
+<meta property="og:image" content="https://thumbnail0.baidupcs.com/thumbnail/8e405ab39c64194bc46b1ae976b7943b?fid=3360643507-250528-165409894316938&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-HroqfH9zoh4f5NnMnLGMgJRb%2f0k%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3981973583525071722&dp-callid=0&time=1561104000&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1">
+<meta property="og:image" content="https://thumbnail0.baidupcs.com/thumbnail/f5bf8c4760d55931cef4178d8c3d2d6c?fid=3360643507-250528-335359646666457&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-UeviQpO5uVYd8bxSZmZtrSal1Fw%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3981973583525071722&dp-callid=0&time=1561104000&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1">
+<meta property="og:image" content="https://thumbnail0.baidupcs.com/thumbnail/d04b2799d9e57f84b2c4557d1e393f4c?fid=3360643507-250528-711104266899741&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-ZnmM%2fxzjMoqPMYVLWaglZJ306rc%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3981973583525071722&dp-callid=0&time=1561104000&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1">
+<meta property="og:image" content="https://thumbnail0.baidupcs.com/thumbnail/f13fbe5ba435006babfc0e55bde91c8f?fid=3360643507-250528-698092720352800&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-BOqIFs6lG%2b5%2f%2b0taOO338DBArFI%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3981973583525071722&dp-callid=0&time=1561104000&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1">
+<meta property="og:image" content="https://thumbnail0.baidupcs.com/thumbnail/0212c6ae80921e29a6269798be56e4ac?fid=3360643507-250528-551481268337412&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-d25N9yHm8iky6RALcx4L4Ji9fqQ%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3981973583525071722&dp-callid=0&time=1561104000&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1">
+<meta property="og:image" content="https://thumbnail0.baidupcs.com/thumbnail/c4fa1fc1ea5f657cd0d3d52f8680ca55?fid=3360643507-250528-759687813749093&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-2RMEvRyqNcH5eWdD%2f%2b8xKSZBZrw%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3981973583525071722&dp-callid=0&time=1561104000&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1">
+<meta property="og:updated_time" content="2019-06-21T08:40:00.782Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSH Git多账号配置 一分钟上手">
-<meta name="twitter:description" content="使用介绍默认情况下，一台电脑只有一个SSH Key，假如我们有多个Github账号，需要将代码迁移账号，这时候这篇文章就派上用场啦~ 简单上手1.生成秘钥公钥装好Git后，桌面右键点击Git Bash进入Git界面，输入以下命令：12345//切换到ssh目录cd ~/.ssh//新建两个账户的ssh-keyssh-keygen -t rsa -C 10000@qq.comssh-keygen -">
-<meta name="twitter:image" content="https://zky-luke.github.io/2019/03/06/images/4.png">
-  
-    <link rel="icon" href="/images/favicon.ico">
-  
-  <link rel="stylesheet" href="/css/index.css">
+<meta name="twitter:description" content="使用介绍默认情况下，一台电脑只有一个SSH Key，假如我们有多个Github账号，需要将代码迁移账号，这时候这篇文章就派上用场啦~ 简单上手一、生成秘钥公钥装好Git后，桌面右键点击Git Bash进入Git界面，输入以下命令：12345//切换到ssh目录cd ~/.ssh//新建两个账户的ssh-keyssh-keygen -t rsa -C 10000@qq.comssh-keygen -">
+<meta name="twitter:image" content="https://thumbnail0.baidupcs.com/thumbnail/6ebce21c0f2684da94a1b0b3e68389f2?fid=3360643507-250528-482866487959044&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-fFd6U9hnDdHp7f5iVudaw1wp668%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3981973583525071722&dp-callid=0&time=1561104000&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1">
+    
+        <link rel="alternate" type="application/atom+xml" title="Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
-</html>
-<body style="
 
+<body>
+    <div id="loading" class="active"></div>
 
-  background-color: #eff0f6
-
-">
-  <div id="container">
-    <nav id="nav">
-  <header class="header">
-    <a href="/" class="title">Dennis Yan</a>
-  </header>
-  <div class="ctnWrap">
-    <div class="icons">
-      
-        
-          
-            <a href="https://segmentfault.com/u/luke_58aab11b996be/articles" target="_blank" class="nav-icn iconfont icon-segmentfault"></a>
-          
-        
-          
-            <a href="https://www.jianshu.com/u/74d1e2cb3a9e" target="_blank" class="nav-icn iconfont icon-jianshu"></a>
-          
-        
-          
-            <a href="https://github.com/zky-Luke" target="_blank" class="nav-icn iconfont icon-github"></a>
-          
-        
-      
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Dennis Yan</h5>
+          <a href="mailto:1062479924@qq.com" title="1062479924@qq.com" class="mail">1062479924@qq.com</a>
+        </hgroup>
+      </div>
     </div>
-    <div class="menu">
-      
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
         
-            <a href="/" class="nav-menu ">HOME</a>
-          
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
         
-            <a href="/archives" class="nav-menu ">ARCHIVE</a>
-          
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
         
-            <a href="/about" class="nav-menu ">ABOUT</a>
-          
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
         
-      
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zky-Luke" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.jianshu.com/u/74d1e2cb3a9e" target="_blank">
+                <i class="icon icon-lg icon-book"></i>
+                Jianshu
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-exclamation-circle"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
     </div>
   </div>
-</nav>
-    <div id="main"><section class="article">
-  <h2 class="title">SSH Git多账号配置 一分钟上手</h2>
-  <p class="sub">Mar 6, 2019</p>
-  <article class="content">
-    <h1 id="使用介绍"><a href="#使用介绍" class="headerlink" title="使用介绍"></a>使用介绍</h1><p>默认情况下，一台电脑只有一个SSH Key，假如我们有多个Github账号，需要将代码迁移账号，这时候这篇文章就派上用场啦~</p>
-<h1 id="简单上手"><a href="#简单上手" class="headerlink" title="简单上手"></a>简单上手</h1><h6 id="1-生成秘钥公钥"><a href="#1-生成秘钥公钥" class="headerlink" title="1.生成秘钥公钥"></a>1.生成秘钥公钥</h6><p>装好Git后，桌面右键点击Git Bash进入Git界面，输入以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//切换到ssh目录</span><br><span class="line">cd ~/.ssh</span><br><span class="line">//新建两个账户的ssh-key</span><br><span class="line">ssh-keygen -t rsa -C 10000@qq.com</span><br><span class="line">ssh-keygen -t rsa -C 20000@qq.com</span><br></pre></td></tr></table></figure></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/7075647-2be50bd4387788a6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1.png"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/7075647-9e392d27302b71e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="5.png"></p>
-<p>上面先填写Git账户的ssh-key的名称（默认是id_rsa）,下一步则是填写密码及确认密码，不需要密码的话可以直接回车即可。<br>在ssh文件夹已经生成文件，如下<br><img src="https://upload-images.jianshu.io/upload_images/7075647-889e6237b1584b44.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="6.png"></p>
-<h6 id="2-查看秘钥并放到Github账户"><a href="#2-查看秘钥并放到Github账户" class="headerlink" title="2.查看秘钥并放到Github账户"></a>2.查看秘钥并放到Github账户</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 查看秘钥</span><br><span class="line">cat id_rsa_test.pub</span><br><span class="line">cat id_rsa_test2.pub</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/7075647-1923a9f9a778a401.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3.png"><br>分别添加到两个github账户，详细步骤百度大大搜一搜哈</p>
-<h6 id="3-在ssh目录下创建config并配置"><a href="#3-在ssh目录下创建config并配置" class="headerlink" title="3.在ssh目录下创建config并配置"></a>3.在ssh目录下创建config并配置</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 创建config</span><br><span class="line">touch config</span><br><span class="line">// 查看当前目录</span><br><span class="line">ls</span><br><span class="line">// 编辑config</span><br><span class="line">vim config</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/7075647-56341443598f11f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7.png"></p>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">SSH Git多账号配置 一分钟上手</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">SSH Git多账号配置 一分钟上手</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-03-06T11:40:17.000Z" itemprop="datePublished" class="page-time">
+  2019-03-06
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#使用介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">使用介绍</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简单上手"><span class="post-toc-number">2.</span> <span class="post-toc-text">简单上手</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、生成秘钥公钥"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">一、生成秘钥公钥</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、查看秘钥并放到Github账户"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">二、查看秘钥并放到Github账户</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、在ssh目录下创建config并配置"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">三、在ssh目录下创建config并配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#四、测试是否配置成功"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">四、测试是否配置成功</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#项目迁移"><span class="post-toc-number">3.</span> <span class="post-toc-text">项目迁移</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Article1" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">SSH Git多账号配置 一分钟上手</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-03-06 19:40:17" datetime="2019-03-06T11:40:17.000Z" itemprop="datePublished">2019-03-06</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="使用介绍"><a href="#使用介绍" class="headerlink" title="使用介绍"></a>使用介绍</h1><p>默认情况下，一台电脑只有一个SSH Key，假如我们有多个Github账号，需要将代码迁移账号，这时候这篇文章就派上用场啦~</p>
+<h1 id="简单上手"><a href="#简单上手" class="headerlink" title="简单上手"></a>简单上手</h1><h2 id="一、生成秘钥公钥"><a href="#一、生成秘钥公钥" class="headerlink" title="一、生成秘钥公钥"></a>一、生成秘钥公钥</h2><p>装好Git后，桌面右键点击Git Bash进入Git界面，输入以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//切换到ssh目录</span><br><span class="line">cd ~/.ssh</span><br><span class="line">//新建两个账户的ssh-key</span><br><span class="line">ssh-keygen -t rsa -C 10000@qq.com</span><br><span class="line">ssh-keygen -t rsa -C 20000@qq.com</span><br></pre></td></tr></table></figure></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://thumbnail0.baidupcs.com/thumbnail/6ebce21c0f2684da94a1b0b3e68389f2?fid=3360643507-250528-482866487959044&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-fFd6U9hnDdHp7f5iVudaw1wp668%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3981973583525071722&dp-callid=0&time=1561104000&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1" alt="1.png" title>
+                </div>
+                <div class="image-caption">1.png</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://thumbnail0.baidupcs.com/thumbnail/493baedde40fedbf0316a31c4d98cfe3?fid=3360643507-250528-227889363012651&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-g%2bJiu8zMmQhxQ6R2FuRSgvU%2fav8%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3981973583525071722&dp-callid=0&time=1561104000&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1" alt="2.png" title>
+                </div>
+                <div class="image-caption">2.png</div>
+            </figure>
+<p>上面先填写Git账户的ssh-key的名称（默认是id_rsa）,下一步则是填写密码及确认密码，不需要密码的话可以直接回车即可。<br>在ssh文件夹已经生成文件，如下<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://thumbnail0.baidupcs.com/thumbnail/8e405ab39c64194bc46b1ae976b7943b?fid=3360643507-250528-165409894316938&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-HroqfH9zoh4f5NnMnLGMgJRb%2f0k%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3981973583525071722&dp-callid=0&time=1561104000&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1" alt="3.png" title>
+                </div>
+                <div class="image-caption">3.png</div>
+            </figure></p>
+<h2 id="二、查看秘钥并放到Github账户"><a href="#二、查看秘钥并放到Github账户" class="headerlink" title="二、查看秘钥并放到Github账户"></a>二、查看秘钥并放到Github账户</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 查看秘钥</span><br><span class="line">cat id_rsa_test.pub</span><br><span class="line">cat id_rsa_test2.pub</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://thumbnail0.baidupcs.com/thumbnail/f5bf8c4760d55931cef4178d8c3d2d6c?fid=3360643507-250528-335359646666457&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-UeviQpO5uVYd8bxSZmZtrSal1Fw%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3981973583525071722&dp-callid=0&time=1561104000&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1" alt="4.png" title>
+                </div>
+                <div class="image-caption">4.png</div>
+            </figure>
+<p>分别添加到两个github账户，详细步骤百度大大搜一搜哈</p>
+<h2 id="三、在ssh目录下创建config并配置"><a href="#三、在ssh目录下创建config并配置" class="headerlink" title="三、在ssh目录下创建config并配置"></a>三、在ssh目录下创建config并配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 创建config</span><br><span class="line">touch config</span><br><span class="line">// 查看当前目录</span><br><span class="line">ls</span><br><span class="line">// 编辑config</span><br><span class="line">vim config</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://thumbnail0.baidupcs.com/thumbnail/d04b2799d9e57f84b2c4557d1e393f4c?fid=3360643507-250528-711104266899741&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-ZnmM%2fxzjMoqPMYVLWaglZJ306rc%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3981973583525071722&dp-callid=0&time=1561104000&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1" alt="5.png" title>
+                </div>
+                <div class="image-caption">5.png</div>
+            </figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 配置github.com</span><br><span class="line">Host github.com    // 自定义域名地址</span><br><span class="line">    HostName github.com   // 真实域名地址</span><br><span class="line">    IdentityFile C:\Users\Admin\.ssh\id_rsa_test    // id_rsa位置</span><br><span class="line">    PreferredAuthentications publickey    // 权限验证</span><br><span class="line">    User username1    // 用户名</span><br><span class="line"></span><br><span class="line"># 配置git.github2.com </span><br><span class="line">Host github2.com </span><br><span class="line">    HostName github.com</span><br><span class="line">    IdentityFile C:\Users\Admin\.ssh\id_rsa_test2</span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line">    User username2</span><br></pre></td></tr></table></figure>
 <p>写入如上配置，域名和id_rsa位置要根据实际情况填写，然后保存即可。</p>
-<h6 id="4-测试是否配置成功"><a href="#4-测试是否配置成功" class="headerlink" title="4.测试是否配置成功"></a>4.测试是否配置成功</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 测试配置</span><br><span class="line">ssh -T git@github.com</span><br><span class="line">ssh -T git@github2.com</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/7075647-204eb3988e0cb25a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="8.png"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/7075647-eb00bd946aaae267.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="9.png"><br>出现上图所示，则表示成功啦~~</p>
+<h2 id="四、测试是否配置成功"><a href="#四、测试是否配置成功" class="headerlink" title="四、测试是否配置成功"></a>四、测试是否配置成功</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 测试配置</span><br><span class="line">ssh -T git@github.com</span><br><span class="line">ssh -T git@github2.com</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://thumbnail0.baidupcs.com/thumbnail/f13fbe5ba435006babfc0e55bde91c8f?fid=3360643507-250528-698092720352800&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-BOqIFs6lG%2b5%2f%2b0taOO338DBArFI%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3981973583525071722&dp-callid=0&time=1561104000&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1" alt="6.png" title>
+                </div>
+                <div class="image-caption">6.png</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://thumbnail0.baidupcs.com/thumbnail/0212c6ae80921e29a6269798be56e4ac?fid=3360643507-250528-551481268337412&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-d25N9yHm8iky6RALcx4L4Ji9fqQ%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3981973583525071722&dp-callid=0&time=1561104000&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1" alt="7.png" title>
+                </div>
+                <div class="image-caption">7.png</div>
+            </figure>
+<p>出现上图所示，则表示成功啦~~</p>
 <h1 id="项目迁移"><a href="#项目迁移" class="headerlink" title="项目迁移"></a>项目迁移</h1><p>假如有个旧账号的项目要迁移到新账号，先把旧账号项目的代码克隆下来，在新账号新建个项目，在cmd添加远程仓库的ssh并命名为origin2,使用如下命令强制提交代码，就ok了，好嗨~<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin2 master -f</span><br></pre></td></tr></table></figure></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/7075647-e0c398d5f591cf3b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="10.png"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://thumbnail0.baidupcs.com/thumbnail/c4fa1fc1ea5f657cd0d3d52f8680ca55?fid=3360643507-250528-759687813749093&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-2RMEvRyqNcH5eWdD%2f%2b8xKSZBZrw%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3981973583525071722&dp-callid=0&time=1561104000&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1" alt="8.png" title>
+                </div>
+                <div class="image-caption">8.png</div>
+            </figure>
 
-  </article>
-  <footer class="f-cf">
+        </div>
+
+        <blockquote class="post-copyright">
     
-      <a href="/2019/06/06/Article5/" class="link f-fl">⟵SSH Git多账号配置 一分钟上手</a>
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-06-21T08:40:00.782Z" itemprop="dateUpdated">2019-06-21 16:40:00</time>
+</span><br>
+
+
+        
+    </div>
     
+    <footer>
+        <a href="https://zky-luke.github.io">
+            <img src="/img/avatar.jpg" alt="Dennis Yan">
+            Dennis Yan
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSH/">SSH</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
     
-      <a href="/2017/12/27/Article2/" class="link f-fr">puppeteer新手入门(chromium下载跳坑)⟶</a>
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zky-luke.github.io/2019/03/06/Article1/&title=《SSH Git多账号配置 一分钟上手》 — Blog&pic=https://zky-luke.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zky-luke.github.io/2019/03/06/Article1/&title=《SSH Git多账号配置 一分钟上手》 — Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zky-luke.github.io/2019/03/06/Article1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SSH Git多账号配置 一分钟上手》 — Blog&url=https://zky-luke.github.io/2019/03/06/Article1/&via=https://zky-luke.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zky-luke.github.io/2019/03/06/Article1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
     
-  </footer>
-</section></div>
-    <footer id="footer" class="f-cf">
-  1062479924@qq.com
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
   
-    
-      
-        · <a href="https://segmentfault.com/u/luke_58aab11b996be/articles" target="_blank" class="nav-icn">Segmentfault</a>
-      
-    
-      
-        · <a href="https://www.jianshu.com/u/74d1e2cb3a9e" target="_blank" class="nav-icn">Jianshu</a>
-      
-    
-      
-        · <a href="https://github.com/zky-Luke" target="_blank" class="nav-icn">Github</a>
-      
-    
+
   
-  <span class="copyright">All rights reserved @Dennis Yan</span>
+    <div class="waves-block waves-effect next">
+      <a href="/2017/07/28/Article4/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">构建自己的npm包 简单实现</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <!-- <i class="icon icon-quote-left"></i> -->
+        你的支持是俺的动力~
+        <!-- <i class="icon icon-quote-right"></i> -->
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Dennis Yan &copy; 2016 - 2019</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
 </footer>
-  </div>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zky-luke.github.io/2019/03/06/Article1/&title=《SSH Git多账号配置 一分钟上手》 — Blog&pic=https://zky-luke.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zky-luke.github.io/2019/03/06/Article1/&title=《SSH Git多账号配置 一分钟上手》 — Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zky-luke.github.io/2019/03/06/Article1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SSH Git多账号配置 一分钟上手》 — Blog&url=https://zky-luke.github.io/2019/03/06/Article1/&via=https://zky-luke.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zky-luke.github.io/2019/03/06/Article1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACL0lEQVR42u3aQZKDMAwF0dz/0sw2UwnQXwpUIbdXUwkxel5oLFuvFx7b2zj+5PPbzyf5W348ZMiQ8VjGdjhI0Cl177d8Ob5QZciQsQBjL4ORoI+Dqz3JY5MhQ4aMYwYJggdN3itDhgwZte0amYcUqLcmXBkyZDyQQYrYNFwOvrUWlyFDxgMZ/NT9/r8vud+QIUPGoxhbOPi2j5SynUj+zSlDhozRDJ7g0qtNfjyHClTSliFDhozRDH4xyTdwvNRMl6C1WZQhQ8bDGdcd9POUnS7iydmhDBkyBjHI1BzAGynIIvLnZciQMZXR2fzx4jNtGotbPWTIkDGacXWK5BvB4yYMVBLLkCFjKCM91uef18pasohf2DJkyFiAUbsYuKI0rW0QZciQsQKjFlxaypKwSKpF54UyZMgYxOi3TZAtY/rbdGlkyJCxGuNXzRNpkk0L2t3/HjJkyBjHSNsmaimyFiK/OpUhQ8YKDF5GdkJPgw4+lyFDxmhG7Xirk4L7JNR4IUOGjHGMtIGVl7LpNQBZlN15ZMiQsQyjlojToNOrzaAPV4YMGaMZJF3yNlYCS1vEThZFhgwZQxlbONKEW2vjiJO4DBkyRjM6l521zV+tSI7PDmXIkDGO0SlKeXNYP+GebBNlyJCxAONXiS8tgNOtHrrClCFDxvKMTvNEmtaDzagMGTJklF5Wm6d28SBDhowVGFdcBtRmTi9BZciQsQKj1uLQb7A4TvQ8TcuQIWM04w/uRWqYo1T5WwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
 </body>
 </html>

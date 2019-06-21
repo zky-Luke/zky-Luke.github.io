@@ -1,79 +1,197 @@
 <!DOCTYPE html>
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
-  
-  <title>Electron 快速入门及打包 | Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、初步理解简介Electron 可以让你使用纯 JavaScript 调用丰富的原生 APIs 来创造桌面应用。你可以把它看作是专注于桌面应用而不是 web 服务器的，io.js 的一个变体。这不意味着 Electron 是绑定了 GUI 库的 JavaScript。相反，Electron 使用 web 页面作为它的 GUI，所以你能把它看作成一个被 JavaScript 控制的，精简版的 Ch">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Electron 快速入门及打包 | Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Electron">
+    <meta name="description" content="一、初步理解简介Electron 可以让你使用纯 JavaScript 调用丰富的原生 APIs 来创造桌面应用。你可以把它看作是专注于桌面应用而不是 web 服务器的，io.js 的一个变体。这不意味着 Electron 是绑定了 GUI 库的 JavaScript。相反，Electron 使用 web 页面作为它的 GUI，所以你能把它看作成一个被 JavaScript 控制的，精简版的 Ch">
+<meta name="keywords" content="Electron">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Electron 快速入门及打包">
 <meta property="og:url" content="https://zky-luke.github.io/2017/07/26/Article3/index.html">
 <meta property="og:site_name" content="Blog">
 <meta property="og:description" content="一、初步理解简介Electron 可以让你使用纯 JavaScript 调用丰富的原生 APIs 来创造桌面应用。你可以把它看作是专注于桌面应用而不是 web 服务器的，io.js 的一个变体。这不意味着 Electron 是绑定了 GUI 库的 JavaScript。相反，Electron 使用 web 页面作为它的 GUI，所以你能把它看作成一个被 JavaScript 控制的，精简版的 Ch">
-<meta property="og:locale" content="default">
-<meta property="og:image" content="https://zky-luke.github.io/2017/07/26/images/2.png">
-<meta property="og:updated_time" content="2019-06-20T02:47:03.665Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7075647-4bb373961c7aff8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7075647-6a7acae7eb249639.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-06-21T06:33:57.152Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Electron 快速入门及打包">
 <meta name="twitter:description" content="一、初步理解简介Electron 可以让你使用纯 JavaScript 调用丰富的原生 APIs 来创造桌面应用。你可以把它看作是专注于桌面应用而不是 web 服务器的，io.js 的一个变体。这不意味着 Electron 是绑定了 GUI 库的 JavaScript。相反，Electron 使用 web 页面作为它的 GUI，所以你能把它看作成一个被 JavaScript 控制的，精简版的 Ch">
-<meta name="twitter:image" content="https://zky-luke.github.io/2017/07/26/images/2.png">
-  
-    <link rel="icon" href="/images/favicon.ico">
-  
-  <link rel="stylesheet" href="/css/index.css">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/7075647-4bb373961c7aff8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+    
+        <link rel="alternate" type="application/atom+xml" title="Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
 </head>
-</html>
-<body style="
 
+<body>
+    <div id="loading" class="active"></div>
 
-  background-color: #eff0f6
-
-">
-  <div id="container">
-    <nav id="nav">
-  <header class="header">
-    <a href="/" class="title">Dennis Yan</a>
-  </header>
-  <div class="ctnWrap">
-    <div class="icons">
-      
-        
-          
-            <a href="https://segmentfault.com/u/luke_58aab11b996be/articles" target="_blank" class="nav-icn iconfont icon-segmentfault"></a>
-          
-        
-          
-            <a href="https://www.jianshu.com/u/74d1e2cb3a9e" target="_blank" class="nav-icn iconfont icon-jianshu"></a>
-          
-        
-          
-            <a href="https://github.com/zky-Luke" target="_blank" class="nav-icn iconfont icon-github"></a>
-          
-        
-      
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Dennis Yan</h5>
+          <a href="mailto:1062479924@qq.com" title="1062479924@qq.com" class="mail">1062479924@qq.com</a>
+        </hgroup>
+      </div>
     </div>
-    <div class="menu">
-      
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
         
-            <a href="/" class="nav-menu ">HOME</a>
-          
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
         
-            <a href="/archives" class="nav-menu ">ARCHIVE</a>
-          
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
         
-            <a href="/about" class="nav-menu ">ABOUT</a>
-          
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
         
-      
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zky-Luke" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.jianshu.com/u/74d1e2cb3a9e" target="_blank">
+                <i class="icon icon-lg icon-book"></i>
+                Jianshu
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-exclamation-circle"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
     </div>
   </div>
-</nav>
-    <div id="main"><section class="article">
-  <h2 class="title">Electron 快速入门及打包</h2>
-  <p class="sub">Jul 26, 2017</p>
-  <article class="content">
-    <h1 id="一、初步理解"><a href="#一、初步理解" class="headerlink" title="一、初步理解"></a>一、初步理解</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Electron 可以让你使用纯 JavaScript 调用丰富的原生 APIs 来创造桌面应用。你可以把它看作是专注于桌面应用而不是 web 服务器的，io.js 的一个变体。<br>这不意味着 Electron 是绑定了 GUI 库的 JavaScript。相反，Electron 使用 web 页面作为它的 GUI，所以你能把它看作成一个被 JavaScript 控制的，精简版的 Chromium 浏览器。</p>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Electron 快速入门及打包</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Electron 快速入门及打包</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-07-26T11:45:26.000Z" itemprop="datePublished" class="page-time">
+  2017-07-26
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一、初步理解"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、初步理解</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#主进程"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">主进程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#渲染进程"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">渲染进程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#主进程与渲染进程的区别"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">主进程与渲染进程的区别</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二、创建-Electron-应用"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、创建 Electron 应用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目录结构"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">目录结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-1-创建app目录，在目录中新建index-html及main-js文件（暂时不考虑renderer-js）"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">1.1 创建app目录，在目录中新建index.html及main.js文件（暂时不考虑renderer.js）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-2-创建配置文件package-json-npm-init-y"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">1.2 创建配置文件package.json ( npm init -y )</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#三、运行-Electron-应用"><span class="post-toc-number">3.</span> <span class="post-toc-text">三、运行 Electron 应用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装electron-prebuilt运行项目"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">安装electron-prebuilt运行项目</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#你只需要按照如下方式直接运行你的应用"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">你只需要按照如下方式直接运行你的应用</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#四、Electron-应用打包"><span class="post-toc-number">4.</span> <span class="post-toc-text">四、Electron 应用打包</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装electron-packager"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">安装electron-packager</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#打包阶段（有两种方法）"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">打包阶段（有两种方法）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-1-直接用命令打包"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">1.1 直接用命令打包</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-2-首先在项目根目录下面的-package-json的scripts-下添加代码"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">1.2 首先在项目根目录下面的 package.json的scripts 下添加代码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#在项目中新建outApp目录"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">在项目中新建outApp目录</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用命令-npm-run-script-packager"><span class="post-toc-number">4.6.</span> <span class="post-toc-text">使用命令 npm run-script packager</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Article3" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Electron 快速入门及打包</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-07-26 19:45:26" datetime="2017-07-26T11:45:26.000Z" itemprop="datePublished">2017-07-26</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="一、初步理解"><a href="#一、初步理解" class="headerlink" title="一、初步理解"></a>一、初步理解</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Electron 可以让你使用纯 JavaScript 调用丰富的原生 APIs 来创造桌面应用。你可以把它看作是专注于桌面应用而不是 web 服务器的，io.js 的一个变体。<br>这不意味着 Electron 是绑定了 GUI 库的 JavaScript。相反，Electron 使用 web 页面作为它的 GUI，所以你能把它看作成一个被 JavaScript 控制的，精简版的 Chromium 浏览器。</p>
 <h2 id="主进程"><a href="#主进程" class="headerlink" title="主进程"></a>主进程</h2><p>在 Electron 里，运行 package.json 里 main 脚本的进程被称为主进程。在主进程运行的脚本可以以创建 web 页面的形式展示 GUI。</p>
 <h2 id="渲染进程"><a href="#渲染进程" class="headerlink" title="渲染进程"></a>渲染进程</h2><p>由于 Electron 使用 Chromium 来展示页面，所以 Chromium 的多进程结构也被充分利用。每个 Electron 的页面都在运行着自己的进程，这样的进程我们称之为渲染进程。<br>在一般浏览器中，网页通常会在沙盒环境下运行，并且不允许访问原生资源。然而，Electron 用户拥有在网页中调用 io.js 的 APIs 的能力，可以与底层操作系统直接交互。</p>
 <h2 id="主进程与渲染进程的区别"><a href="#主进程与渲染进程的区别" class="headerlink" title="主进程与渲染进程的区别"></a>主进程与渲染进程的区别</h2><p>主进程使用 BrowserWindow 实例创建网页。每个 BrowserWindow 实例都在自己的渲染进程里运行着一个网页。当一个 BrowserWindow 实例被销毁后，相应的渲染进程也会被终止。<br>主进程管理所有页面和与之对应的渲染进程。每个渲染进程都是相互独立的，并且只关心他们自己的网页。<br>由于在网页里管理原生 GUI 资源是非常危险而且容易造成资源泄露，所以在网页面调用 GUI 相关的 APIs 是不被允许的。如果你想在网页里使用 GUI 操作，其对应的渲染进程必须与主进程进行通讯，请求主进程进行相关的 GUI 操作。<br>在 Electron，我们提供用于在主进程与渲染进程之间通讯的 <a href="https://github.com/electron/electron/blob/master/docs-translations/zh-CN/api/ipc-main-process.md" target="_blank" rel="noopener">ipc</a> 模块。并且也有一个远程进程调用风格的通讯模块 <a href="https://www.w3cschool.cn/electronmanual/electronmanual-remote.html" target="_blank" rel="noopener">remote</a>。</p>
@@ -87,7 +205,13 @@
 <h1 id="三、运行-Electron-应用"><a href="#三、运行-Electron-应用" class="headerlink" title="三、运行 Electron 应用"></a>三、运行 Electron 应用</h1><h2 id="安装electron-prebuilt运行项目"><a href="#安装electron-prebuilt运行项目" class="headerlink" title="安装electron-prebuilt运行项目"></a>安装electron-prebuilt运行项目</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install electron-prebuilt -save</span><br></pre></td></tr></table></figure>
 <h2 id="你只需要按照如下方式直接运行你的应用"><a href="#你只需要按照如下方式直接运行你的应用" class="headerlink" title="你只需要按照如下方式直接运行你的应用"></a>你只需要按照如下方式直接运行你的应用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">electron .</span><br></pre></td></tr></table></figure>
 <p>程序执行成功了…</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/7075647-4bb373961c7aff8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="22.png"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://upload-images.jianshu.io/upload_images/7075647-4bb373961c7aff8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="22.png" title>
+                </div>
+                <div class="image-caption">22.png</div>
+            </figure>
 <h1 id="四、Electron-应用打包"><a href="#四、Electron-应用打包" class="headerlink" title="四、Electron 应用打包"></a>四、Electron 应用打包</h1><h2 id="安装electron-packager"><a href="#安装electron-packager" class="headerlink" title="安装electron-packager"></a>安装electron-packager</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install electron-packager --save-dev</span><br></pre></td></tr></table></figure>
 <p>安装后可以在package.json中看到:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;electron-packager&quot;: &quot;^8.7.2&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="打包阶段（有两种方法）"><a href="#打包阶段（有两种方法）" class="headerlink" title="打包阶段（有两种方法）"></a>打包阶段（有两种方法）</h2><h2 id="1-1-直接用命令打包"><a href="#1-1-直接用命令打包" class="headerlink" title="1.1 直接用命令打包"></a>1.1 直接用命令打包</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">electron-packager &lt;location of project&gt; &lt;name of project&gt; &lt;platform&gt; &lt;architecture&gt; &lt;electron version&gt; &lt;optional options&gt;</span><br></pre></td></tr></table></figure>
@@ -122,37 +246,289 @@
 </blockquote>
 <p>这时候需要做的是翻墙（打开蓝灯翻墙软件），多执行几次npm run-script packager，就可以成功了</p>
 <p>成功截图如下：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/7075647-6a7acae7eb249639.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="23.png"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://upload-images.jianshu.io/upload_images/7075647-6a7acae7eb249639.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="23.png" title>
+                </div>
+                <div class="image-caption">23.png</div>
+            </figure>
 <p>打包成功啦~~</p>
 <p>github源码地址：<a href="https://github.com/zky-Luke/electron" target="_blank" rel="noopener">https://github.com/zky-Luke/electron</a></p>
 
-  </article>
-  <footer class="f-cf">
+        </div>
+
+        <blockquote class="post-copyright">
     
-      <a href="/2017/07/28/Article4/" class="link f-fl">⟵构建自己的npm包 简单实现</a>
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-06-21T06:33:57.152Z" itemprop="dateUpdated">2019-06-21 14:33:57</time>
+</span><br>
+
+
+        
+    </div>
     
+    <footer>
+        <a href="https://zky-luke.github.io">
+            <img src="/img/avatar.jpg" alt="Dennis Yan">
+            Dennis Yan
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Electron/">Electron</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
     
-  </footer>
-</section></div>
-    <footer id="footer" class="f-cf">
-  1062479924@qq.com
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zky-luke.github.io/2017/07/26/Article3/&title=《Electron 快速入门及打包》 — Blog&pic=https://zky-luke.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zky-luke.github.io/2017/07/26/Article3/&title=《Electron 快速入门及打包》 — Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zky-luke.github.io/2017/07/26/Article3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Electron 快速入门及打包》 — Blog&url=https://zky-luke.github.io/2017/07/26/Article3/&via=https://zky-luke.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zky-luke.github.io/2017/07/26/Article3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
   
-    
-      
-        · <a href="https://segmentfault.com/u/luke_58aab11b996be/articles" target="_blank" class="nav-icn">Segmentfault</a>
-      
-    
-      
-        · <a href="https://www.jianshu.com/u/74d1e2cb3a9e" target="_blank" class="nav-icn">Jianshu</a>
-      
-    
-      
-        · <a href="https://github.com/zky-Luke" target="_blank" class="nav-icn">Github</a>
-      
-    
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/07/28/Article4/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">构建自己的npm包 简单实现</h4>
+      </a>
+    </div>
   
-  <span class="copyright">All rights reserved @Dennis Yan</span>
+
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <!-- <i class="icon icon-quote-left"></i> -->
+        你的支持是俺的动力~
+        <!-- <i class="icon icon-quote-right"></i> -->
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Dennis Yan &copy; 2016 - 2019</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
 </footer>
-  </div>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zky-luke.github.io/2017/07/26/Article3/&title=《Electron 快速入门及打包》 — Blog&pic=https://zky-luke.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zky-luke.github.io/2017/07/26/Article3/&title=《Electron 快速入门及打包》 — Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zky-luke.github.io/2017/07/26/Article3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Electron 快速入门及打包》 — Blog&url=https://zky-luke.github.io/2017/07/26/Article3/&via=https://zky-luke.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zky-luke.github.io/2017/07/26/Article3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJElEQVR42u3aQXLjMAwEQP//095rDllmBlRSZbJ1cqUkG60DAoB4veLrvby+3rO+P/+V129cGBgYH8vIQ1yHtX5qHWj7Or6hYmBgXMD4Xwbb+eqdO/PYMDAwMNb3tAl3HXT+uxgYGBhJwo2+Ogg6eREYGBgYs1Fa/g1JcH/ai2NgYHwgI5+6//3nXznfwMDA+CjGu7x2qHlRWEeFgYFxNGM2SksKu9k9O6M9DAyMUxntj+UF3E6aXkf1StwYGBgHMdrBfZsc88HZbOT3zf8NDAyMQxntIKxtR9tjzrx8xMDAuI2xf2zQLlvkrew6cWNgYNzAmCXQvJhLnlo31UUTi4GBcRxjVsDtlGg5KR8IYmBg3MBoE2iesttycFYgYmBg3MDYT7s7RwVJYo3aVwwMjAsY+6O0dvNhtpAx3OzAwMD4cEaSEGct6OxwtF6BxcDAOJqRt6A7axazEIfnqBgYGMcxZitfz477ZyM8DAyMexhtm5ocGMza3dlrwsDAwJg1n+vDy3roH7fEGBgY9zDaEdvseHK2VFGccmBgYBzKaA8m139PEm67IhY1sRgYGMcx3uXVDtRmaxx1q4yBgXE0o01zzwb91HIGBgbGDYx29N8O2p5KuPWbxsDAOI5RjODLYVwSVh7uD3UuBgYGRlnwJck0L/5+iAcDAwMjHnU9u7SRF68YGBg3MHYOA9qnnlosw8DAuIcxm2XtL1jsl5sYGBgXMP4BgFVLqQilVf4AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
 </body>
 </html>
