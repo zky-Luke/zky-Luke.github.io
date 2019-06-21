@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>puppeteer新手入门(chromium下载跳坑) | Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Puppeteer,Chromium,NodeJS">
+    <meta name="description" content="puppeteer简介puppeteer 翻译是操纵木偶的人，利用这个工具，我们能做一个操纵页面的人。puppeteer是一个nodejs的库，支持调用Chrome的API来操纵Web，相比较Selenium或是PhantomJs,它最大的特点就是它的操作Dom可以完全在内存中进行模拟既在V8引擎中处理而不打开浏览器，而且关键是这个是Chrome团队在维护，会拥有更好的兼容性和前景。 puppet">
+<meta name="keywords" content="Puppeteer,Chromium,NodeJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="puppeteer新手入门(chromium下载跳坑)">
+<meta property="og:url" content="https://zky-luke.github.io/2017/12/27/Article2/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="puppeteer简介puppeteer 翻译是操纵木偶的人，利用这个工具，我们能做一个操纵页面的人。puppeteer是一个nodejs的库，支持调用Chrome的API来操纵Web，相比较Selenium或是PhantomJs,它最大的特点就是它的操作Dom可以完全在内存中进行模拟既在V8引擎中处理而不打开浏览器，而且关键是这个是Chrome团队在维护，会拥有更好的兼容性和前景。 puppet">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://thumbnail0.baidupcs.com/thumbnail/0e490b0801aea8a3bf1e5fbebc0db8b8?fid=3360643507-250528-102051492731432&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-U7g5TzKro4PX2%2b34OLU3LAwcPeo%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3982675261896320647&dp-callid=0&time=1561107600&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1">
+<meta property="og:updated_time" content="2019-06-21T09:20:47.511Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="puppeteer新手入门(chromium下载跳坑)">
+<meta name="twitter:description" content="puppeteer简介puppeteer 翻译是操纵木偶的人，利用这个工具，我们能做一个操纵页面的人。puppeteer是一个nodejs的库，支持调用Chrome的API来操纵Web，相比较Selenium或是PhantomJs,它最大的特点就是它的操作Dom可以完全在内存中进行模拟既在V8引擎中处理而不打开浏览器，而且关键是这个是Chrome团队在维护，会拥有更好的兼容性和前景。 puppet">
+<meta name="twitter:image" content="https://thumbnail0.baidupcs.com/thumbnail/0e490b0801aea8a3bf1e5fbebc0db8b8?fid=3360643507-250528-102051492731432&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-U7g5TzKro4PX2%2b34OLU3LAwcPeo%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3982675261896320647&dp-callid=0&time=1561107600&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1">
+    
+        <link rel="alternate" type="application/atom+xml" title="Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Dennis Yan</h5>
+          <a href="mailto:1062479924@qq.com" title="1062479924@qq.com" class="mail">1062479924@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zky-Luke" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.jianshu.com/u/74d1e2cb3a9e" target="_blank">
+                <i class="icon icon-lg icon-book"></i>
+                Jianshu
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-exclamation-circle"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">puppeteer新手入门(chromium下载跳坑)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">puppeteer新手入门(chromium下载跳坑)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-12-27T11:44:55.000Z" itemprop="datePublished" class="page-time">
+  2017-12-27
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#puppeteer简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">puppeteer简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#puppeteer功能"><span class="post-toc-number">2.</span> <span class="post-toc-text">puppeteer功能</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#puppeteer轻松入门"><span class="post-toc-number">3.</span> <span class="post-toc-text">puppeteer轻松入门</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1、环境和安装"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">1、环境和安装</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2、创建项目"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">2、创建项目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-1、创建test目录，进入目录执行npm-init"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">2.1、创建test目录，进入目录执行npm init</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-2、安装-puppeteer"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">2.2、安装 puppeteer</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-3、手动下载Chromium"><span class="post-toc-number">3.2.3.</span> <span class="post-toc-text">2.3、手动下载Chromium</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-4、新建index-js（截图功能）-代码如下："><span class="post-toc-number">3.2.4.</span> <span class="post-toc-text">2.4、新建index.js（截图功能）, 代码如下：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-5、puppeteer相关地址"><span class="post-toc-number">3.2.5.</span> <span class="post-toc-text">2.5、puppeteer相关地址</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Article2" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">puppeteer新手入门(chromium下载跳坑)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-12-27 19:44:55" datetime="2017-12-27T11:44:55.000Z" itemprop="datePublished">2017-12-27</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="puppeteer简介"><a href="#puppeteer简介" class="headerlink" title="puppeteer简介"></a>puppeteer简介</h1><p>puppeteer 翻译是操纵木偶的人，利用这个工具，我们能做一个操纵页面的人。puppeteer是一个nodejs的库，支持调用Chrome的API来操纵Web，相比较Selenium或是PhantomJs,它最大的特点就是它的操作Dom可以完全在内存中进行模拟既在V8引擎中处理而不打开浏览器，而且关键是这个是Chrome团队在维护，会拥有更好的兼容性和前景。</p>
+<h1 id="puppeteer功能"><a href="#puppeteer功能" class="headerlink" title="puppeteer功能"></a>puppeteer功能</h1><ul>
+<li>生成页面的截图和PDF。</li>
+<li>抓取SPA并生成预先呈现的内容（即“SSR”）。</li>
+<li>从网站抓取你需要的内容。</li>
+<li>自动表单提交，UI测试，键盘输入等</li>
+<li>创建一个最新的自动化测试环境。使用最新的JavaScript和浏览器功能，直接在最新版本的Chrome中运行测试。</li>
+<li>捕获您的网站的时间线跟踪，以帮助诊断性能问题。</li>
+</ul>
+<h1 id="puppeteer轻松入门"><a href="#puppeteer轻松入门" class="headerlink" title="puppeteer轻松入门"></a>puppeteer轻松入门</h1><h2 id="1、环境和安装"><a href="#1、环境和安装" class="headerlink" title="1、环境和安装"></a>1、环境和安装</h2><p>Puppeteer 至少需要 Node v6.4.0，如要使用 async / await，只有 Node v7.6.0 或更高版本才支持。 node下载地址： <a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">https://nodejs.org/zh-cn/</a></p>
+<h2 id="2、创建项目"><a href="#2、创建项目" class="headerlink" title="2、创建项目"></a>2、创建项目</h2><h3 id="2-1、创建test目录，进入目录执行npm-init"><a href="#2-1、创建test目录，进入目录执行npm-init" class="headerlink" title="2.1、创建test目录，进入目录执行npm init"></a>2.1、创建test目录，进入目录执行npm init</h3><h3 id="2-2、安装-puppeteer"><a href="#2-2、安装-puppeteer" class="headerlink" title="2.2、安装 puppeteer"></a>2.2、安装 puppeteer</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add puppeteer 或者 npm i puppeteer</span><br></pre></td></tr></table></figure>
+<p>可能会出现以下报错:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ERROR: Failed to download Chromium r515411! Set &quot;PUPPETEER_SKIP_CHROMIUM_DOWNLOA</span><br><span class="line">D&quot; env variable to skip download.</span><br></pre></td></tr></table></figure></p>
+<p>是因为在执行安装的过程中需要执行install.js，这里会下载Chromium,官网建议是进行跳过，我们可以执行 —ignore-scripts 忽略这个js执行。也可以通过设置环境变量set PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1阻止下载 Chromium （因为封网，直接下载会失败）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i --save puppeteer --ignore-scripts</span><br></pre></td></tr></table></figure>
+<h3 id="2-3、手动下载Chromium"><a href="#2-3、手动下载Chromium" class="headerlink" title="2.3、手动下载Chromium"></a>2.3、手动下载Chromium</h3><p>下载地址：<a href="https://download-chromium.appspot.com/" target="_blank" rel="noopener">https://download-chromium.appspot.com/</a>  (打开蓝灯翻墙软件…)</p>
+<p>把下载刚刚下载的文件解压出来会有chrome-win32文件夹，把里面的文件拷贝到项目新建的chromium文件夹中</p>
+<h3 id="2-4、新建index-js（截图功能）-代码如下："><a href="#2-4、新建index-js（截图功能）-代码如下：" class="headerlink" title="2.4、新建index.js（截图功能）, 代码如下："></a>2.4、新建index.js（截图功能）, 代码如下：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const puppeteer = require(&apos;puppeteer&apos;);</span><br><span class="line"></span><br><span class="line">(async () =&gt; &#123;</span><br><span class="line">    const browser = await puppeteer.launch();</span><br><span class="line">    const page = await browser.newPage();</span><br><span class="line">    await page.goto(&apos;https://y.qq.com&apos;);</span><br><span class="line">    await page.screenshot(&#123;path: &apos;yqq.png&apos;&#125;);</span><br><span class="line">    browser.close();</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p>打开cmd执行index.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node index.js</span><br></pre></td></tr></table></figure></p>
+<p>这时候可能出现以下错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(node:8672) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejec</span><br><span class="line">tion id: 1): AssertionError [ERR_ASSERTION]: Chromium revision is not downloaded</span><br><span class="line">. Run &quot;npm install&quot;</span><br><span class="line">(node:8672) [DEP0018] DeprecationWarning: Unhandled promise rejections are depre</span><br><span class="line">cated. In the future, promise rejections that are not handled will terminate the</span><br><span class="line"> Node.js process with a non-zero exit code.</span><br></pre></td></tr></table></figure></p>
+<p>显示chromium 未下载错误，因为chromium默认的下载路径是在node_modules/puppeteer/.local-chromium/目录，这时候我们的chromium是在项目根目录，所以需要配置指定路径，修改index.js文件()：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const puppeteer = require(&apos;puppeteer&apos;);</span><br><span class="line"></span><br><span class="line">(async () =&gt; &#123;</span><br><span class="line">      const browser = await puppeteer.launch(&#123;</span><br><span class="line">        executablePath: &apos;./chromium/chrome.exe&apos;,</span><br><span class="line">        headless: false</span><br><span class="line">      &#125;);</span><br><span class="line">      const page = await browser.newPage();</span><br><span class="line">      await page.goto(&apos;http://music.163.com/&apos;);</span><br><span class="line">      await page.screenshot(&#123;path: &apos;music.png&apos;&#125;);</span><br><span class="line">      browser.close();</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<p>puppeteer launch参数说明：</p>
+<ul>
+<li>executablePath： 运行Chromium或Chrome可执行文件的路径</li>
+<li>headless： 是否运行在浏览器headless模式，true为不打开浏览器执行，默认为true</li>
+<li>timeout： 等待浏览器实例启动的最长时间（以毫秒为单位）。默认为30000（30秒）。通过0禁用超时</li>
+<li>args： 传递给浏览器实例的其他参数</li>
+</ul>
+<p>更多参数请参照<a href="https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#class-browser" target="_blank" rel="noopener">官网</a>，再次执行index.js可能出现以下错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: Protocol error (Page.getFrameTree): &apos;Page.getFrameTree&apos; wasn &apos;t found undefined</span><br></pre></td></tr></table></figure></p>
+<p>刚开始找了好久没找到答案，然后上万能的Google找了下，发现了类似的问题<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://thumbnail0.baidupcs.com/thumbnail/0e490b0801aea8a3bf1e5fbebc0db8b8?fid=3360643507-250528-102051492731432&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-U7g5TzKro4PX2%2b34OLU3LAwcPeo%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3982675261896320647&dp-callid=0&time=1561107600&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1" alt="1.png" title>
+                </div>
+                <div class="image-caption">1.png</div>
+            </figure></p>
+<p>可能是chromium的版本存在差异，然后重新在<a href="https://download-chromium.appspot.com/" target="_blank" rel="noopener">chromium官网</a>下载最新版本解压到项目（要注意下相应系统chromium）</p>
+<p>执行index.js， 脚本运行chromium浏览器跳转到界面，截图保存到项目中，这样就成功了…</p>
+<h3 id="2-5、puppeteer相关地址"><a href="#2-5、puppeteer相关地址" class="headerlink" title="2.5、puppeteer相关地址"></a>2.5、puppeteer相关地址</h3><p><a href="https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#class-browser" target="_blank" rel="noopener">puppeteer神器官方文档</a>，可以进行其他强大的功能开发…</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-06-21T09:20:47.511Z" itemprop="dateUpdated">2019-06-21 17:20:47</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://zky-luke.github.io">
+            <img src="/img/avatar.jpg" alt="Dennis Yan">
+            Dennis Yan
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Chromium/">Chromium</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Puppeteer/">Puppeteer</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zky-luke.github.io/2017/12/27/Article2/&title=《puppeteer新手入门(chromium下载跳坑)》 — Blog&pic=https://zky-luke.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zky-luke.github.io/2017/12/27/Article2/&title=《puppeteer新手入门(chromium下载跳坑)》 — Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zky-luke.github.io/2017/12/27/Article2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《puppeteer新手入门(chromium下载跳坑)》 — Blog&url=https://zky-luke.github.io/2017/12/27/Article2/&via=https://zky-luke.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zky-luke.github.io/2017/12/27/Article2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/03/06/Article1/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">SSH Git多账号配置 一分钟上手</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/07/28/Article4/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">构建自己的npm包 简单实现</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <!-- <i class="icon icon-quote-left"></i> -->
+        你的支持是俺的动力~
+        <!-- <i class="icon icon-quote-right"></i> -->
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Dennis Yan &copy; 2016 - 2019</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zky-luke.github.io/2017/12/27/Article2/&title=《puppeteer新手入门(chromium下载跳坑)》 — Blog&pic=https://zky-luke.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zky-luke.github.io/2017/12/27/Article2/&title=《puppeteer新手入门(chromium下载跳坑)》 — Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zky-luke.github.io/2017/12/27/Article2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《puppeteer新手入门(chromium下载跳坑)》 — Blog&url=https://zky-luke.github.io/2017/12/27/Article2/&via=https://zky-luke.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zky-luke.github.io/2017/12/27/Article2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJ0lEQVR42u3aQY6EMAxEUe5/aWY7Eo27qgwtxfmsRnQ0+GVhxXaOQ37Of0/95vrrdaX+lYcfGDBgLMs4y+duTYd6/Q/udnyIAQYMGBsw7sJS1tTBKUHU21fHBgMGDBj1Gjfh6ngYMGDA6DD0cPVjpVIYw4ABA4ZSxLpFpn7g+2ktDgMGjAUZetf993+/Mt+AAQPGUowsXWZU/VBoRwUDBozRjKyVphzssjWd1h4MGDCmMvShY79xpqfpegsOxQ0DBoxBjE5TXsc8dfiTUjYMGDDGMfSrWm8cIuv1xjbBgAFjNOOxOjhK0Hopax9PYcCAMY7httLqdKy/0S9hSCUxDBgwhjL0JKgk0+zSRmfk8OGECwMGjKEMdzCgM7LS1E73MGDA2ICRlZE1LAsra8zBgAFjZ0aWUvXiM7uQEd7sgAEDxrKMrPWWHR/ddr9b0MKAAWMfRvaBN0I8+g8MGDAGMTotMDcd60G772HAgLEDQ68HO2H1SbebDgMGjG0YWSrUL4S5TX+DDQMGjG0YWdDZdmQFcDg9gAEDxjhGnUCfSrhu8WwXsTBgwBjBOM3HHWRm1ziUY+LttTAYMGCMY2TzwewDSoGaXc6AAQPGDgz3spc7Kngq4YY7DQMGjEEMPfFlxzj9SlnWmIMBAwYMfXjgjir1w9+XeGDAgAEjImVFqY5vJVwYMGAsyOgMA54aIWRDUBgwYOzAyHpZ/QsW2QihNciEAQPGeow/uxIi4DPsCzoAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
