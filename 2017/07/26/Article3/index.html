@@ -29,13 +29,13 @@
 <meta property="og:site_name" content="Blog">
 <meta property="og:description" content="一、初步理解简介Electron 可以让你使用纯 JavaScript 调用丰富的原生 APIs 来创造桌面应用。你可以把它看作是专注于桌面应用而不是 web 服务器的，io.js 的一个变体。这不意味着 Electron 是绑定了 GUI 库的 JavaScript。相反，Electron 使用 web 页面作为它的 GUI，所以你能把它看作成一个被 JavaScript 控制的，精简版的 Ch">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://thumbnail0.baidupcs.com/thumbnail/2941431faa9d60a4277b9dced8bd49d2?fid=3360643507-250528-851230618663156&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-8aQdLCJS%2bo1VVdfS3pDZBFWba3c%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3982672093833514952&dp-callid=0&time=1561107600&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1">
-<meta property="og:image" content="https://thumbnail0.baidupcs.com/thumbnail/c5d70586c3571b0844dcb9c8e83607a6?fid=3360643507-250528-624304358034385&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-hT3jMD7mJprIsOc2L%2bff%2b5EEtAU%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3982672093833514952&dp-callid=0&time=1561107600&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1">
-<meta property="og:updated_time" content="2019-06-21T10:00:38.767Z">
+<meta property="og:image" content="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/560ac59937dc50814ead3977dc764db575875a7bf0f832de9dd261c5f2528a8d1b0c08e4093e637cab2a3bf56edcb171?pictype=scale&from=30013&version=3.3.3.3&uin=1062479924&fname=1.png&size=750">
+<meta property="og:image" content="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/893792c458617b7a06969421496adbf37ac8fc9cf3c0dc74cdd72038063015c5f07c6991519e47b18d104159a1e259ed?pictype=scale&from=30013&version=3.3.3.3&uin=1062479924&fname=2.png&size=750">
+<meta property="og:updated_time" content="2019-06-25T03:06:11.914Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Electron 快速入门及打包">
 <meta name="twitter:description" content="一、初步理解简介Electron 可以让你使用纯 JavaScript 调用丰富的原生 APIs 来创造桌面应用。你可以把它看作是专注于桌面应用而不是 web 服务器的，io.js 的一个变体。这不意味着 Electron 是绑定了 GUI 库的 JavaScript。相反，Electron 使用 web 页面作为它的 GUI，所以你能把它看作成一个被 JavaScript 控制的，精简版的 Ch">
-<meta name="twitter:image" content="https://thumbnail0.baidupcs.com/thumbnail/2941431faa9d60a4277b9dced8bd49d2?fid=3360643507-250528-851230618663156&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-8aQdLCJS%2bo1VVdfS3pDZBFWba3c%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3982672093833514952&dp-callid=0&time=1561107600&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1">
+<meta name="twitter:image" content="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/560ac59937dc50814ead3977dc764db575875a7bf0f832de9dd261c5f2528a8d1b0c08e4093e637cab2a3bf56edcb171?pictype=scale&from=30013&version=3.3.3.3&uin=1062479924&fname=1.png&size=750">
     
         <link rel="alternate" type="application/atom+xml" title="Blog" href="/atom.xml">
     
@@ -129,7 +129,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -208,7 +208,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://thumbnail0.baidupcs.com/thumbnail/2941431faa9d60a4277b9dced8bd49d2?fid=3360643507-250528-851230618663156&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-8aQdLCJS%2bo1VVdfS3pDZBFWba3c%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3982672093833514952&dp-callid=0&time=1561107600&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1" alt="1.png" title>
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/560ac59937dc50814ead3977dc764db575875a7bf0f832de9dd261c5f2528a8d1b0c08e4093e637cab2a3bf56edcb171?pictype=scale&from=30013&version=3.3.3.3&uin=1062479924&fname=1.png&size=750" alt="1.png" title>
                 </div>
                 <div class="image-caption">1.png</div>
             </figure>
@@ -249,7 +249,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://thumbnail0.baidupcs.com/thumbnail/c5d70586c3571b0844dcb9c8e83607a6?fid=3360643507-250528-624304358034385&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-hT3jMD7mJprIsOc2L%2bff%2b5EEtAU%3d&expires=8h&chkbd=0&chkv=0&dp-logid=3982672093833514952&dp-callid=0&time=1561107600&size=c1280_u720&quality=90&vuk=3360643507&ft=image&autopolicy=1" alt="2.png" title>
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/893792c458617b7a06969421496adbf37ac8fc9cf3c0dc74cdd72038063015c5f07c6991519e47b18d104159a1e259ed?pictype=scale&from=30013&version=3.3.3.3&uin=1062479924&fname=2.png&size=750" alt="2.png" title>
                 </div>
                 <div class="image-caption">2.png</div>
             </figure>
@@ -263,7 +263,7 @@
     <div class="content">
         
 <span class="post-time">
-    最終更新：<time datetime="2019-06-21T10:00:38.767Z" itemprop="dateUpdated">2019-06-21 18:00:38</time>
+    Last updated: <time datetime="2019-06-25T03:06:11.914Z" itemprop="dateUpdated">2019-06-25 11:06:11</time>
 </span><br>
 
 
@@ -426,7 +426,7 @@
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">

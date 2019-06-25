@@ -29,12 +29,19 @@
 <meta property="og:site_name" content="Blog">
 <meta property="og:description" content="使用介绍默认情况下，一台电脑只有一个SSH Key，假如我们有多个Github账号，需要将代码迁移账号，这时候这篇文章就派上用场啦~ 简单上手一、生成秘钥公钥装好Git后，桌面右键点击Git Bash进入Git界面，输入以下命令：12345//切换到ssh目录cd ~/.ssh//新建两个账户的ssh-keyssh-keygen -t rsa -C 10000@qq.comssh-keygen -">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://zky-luke.github.io/2019/03/06/Article1/link1">
-<meta property="og:updated_time" content="2019-06-25T02:16:54.364Z">
+<meta property="og:image" content="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/72fcfdef868b5686e7d4e13061f8ed8f529393325b8172946e27eb05cfa20cc462cc7cb933590400a88d5b8c38af7631?pictype=scale&from=30013&version=3.3.3.3&uin=1062479924&fname=1.png&size=750">
+<meta property="og:image" content="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/fb673f6b68477ad17e087ec8c8b472ded765a06374aefedf8d83e975966789ba0e118e717aae8e3c950a5a0b85ef756a?pictype=scale&from=30013&version=3.3.3.3&uin=1062479924&fname=2.png&size=750">
+<meta property="og:image" content="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/4feebc8139e922f319f2d0fc346bc0812623ba296b9eb92449895e58fe8d3b3edcdf14b2c4e9c3b36bce2435abbef9d6?pictype=scale&from=30013&version=3.3.3.3&uin=1062479924&fname=3.png&size=750">
+<meta property="og:image" content="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/0715106533a756de624c1e9559871af547ab2ec5180630594cc1acfd72d8bfb6d34720d433b67aec62cf42447bf5ac77?pictype=scale&from=30013&version=3.3.3.3&uin=1062479924&fname=4.png&size=750">
+<meta property="og:image" content="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/ba1bccd4665fa952f2c0e3e94333055be9dba56b739faf5168e8f9a85060f1c1f07c39fcc496b8e1f956a3deaf8e3569?pictype=scale&from=30013&version=3.3.3.3&uin=1062479924&fname=5.png&size=750">
+<meta property="og:image" content="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/8f32a325199aa019f3a3e263be4c551ffd6a02a068778bd96b93591a215a079294a089f3331127decaae429c03cb64b6?pictype=scale&from=30013&version=3.3.3.3&uin=1062479924&fname=6.png&size=750">
+<meta property="og:image" content="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/9078712f12195af71e8522a8ea8da0fd81d3b968c6785e850598d0d019c0504d5bccad29c0ccd9b2fc7288f41b143657?pictype=scale&from=30013&version=3.3.3.3&uin=1062479924&fname=7.png&size=750">
+<meta property="og:image" content="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/6e89e2a896224317c4b529c3ff0afb4765260c74c95f32f3e145445e0f446bdec2e34e544a6f16c0704ec2471be934c9?pictype=scale&from=30013&version=3.3.3.3&uin=1062479924&fname=8.png&size=750">
+<meta property="og:updated_time" content="2019-06-25T03:01:42.028Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSH Git多账号配置 一分钟上手">
 <meta name="twitter:description" content="使用介绍默认情况下，一台电脑只有一个SSH Key，假如我们有多个Github账号，需要将代码迁移账号，这时候这篇文章就派上用场啦~ 简单上手一、生成秘钥公钥装好Git后，桌面右键点击Git Bash进入Git界面，输入以下命令：12345//切换到ssh目录cd ~/.ssh//新建两个账户的ssh-keyssh-keygen -t rsa -C 10000@qq.comssh-keygen -">
-<meta name="twitter:image" content="https://zky-luke.github.io/2019/03/06/Article1/link1">
+<meta name="twitter:image" content="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/72fcfdef868b5686e7d4e13061f8ed8f529393325b8172946e27eb05cfa20cc462cc7cb933590400a88d5b8c38af7631?pictype=scale&from=30013&version=3.3.3.3&uin=1062479924&fname=1.png&size=750">
     
         <link rel="alternate" type="application/atom+xml" title="Blog" href="/atom.xml">
     
@@ -128,7 +135,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -192,21 +199,69 @@
         <div class="post-content" id="post-content" itemprop="postContent">
             <h1 id="使用介绍"><a href="#使用介绍" class="headerlink" title="使用介绍"></a>使用介绍</h1><p>默认情况下，一台电脑只有一个SSH Key，假如我们有多个Github账号，需要将代码迁移账号，这时候这篇文章就派上用场啦~</p>
 <h1 id="简单上手"><a href="#简单上手" class="headerlink" title="简单上手"></a>简单上手</h1><h2 id="一、生成秘钥公钥"><a href="#一、生成秘钥公钥" class="headerlink" title="一、生成秘钥公钥"></a>一、生成秘钥公钥</h2><p>装好Git后，桌面右键点击Git Bash进入Git界面，输入以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//切换到ssh目录</span><br><span class="line">cd ~/.ssh</span><br><span class="line">//新建两个账户的ssh-key</span><br><span class="line">ssh-keygen -t rsa -C 10000@qq.com</span><br><span class="line">ssh-keygen -t rsa -C 20000@qq.com</span><br></pre></td></tr></table></figure></p>
-<p>上面先填写Git账户的ssh-key的名称（默认是id_rsa）,下一步则是填写密码及确认密码，不需要密码的话可以直接回车即可。<br>在ssh文件夹已经生成文件，如下</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/72fcfdef868b5686e7d4e13061f8ed8f529393325b8172946e27eb05cfa20cc462cc7cb933590400a88d5b8c38af7631?pictype=scale&from=30013&version=3.3.3.3&uin=1062479924&fname=1.png&size=750" alt="1.png" title>
+                </div>
+                <div class="image-caption">1.png</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/fb673f6b68477ad17e087ec8c8b472ded765a06374aefedf8d83e975966789ba0e118e717aae8e3c950a5a0b85ef756a?pictype=scale&from=30013&version=3.3.3.3&uin=1062479924&fname=2.png&size=750" alt="2.png" title>
+                </div>
+                <div class="image-caption">2.png</div>
+            </figure>
+<p>上面先填写Git账户的ssh-key的名称（默认是id_rsa）,下一步则是填写密码及确认密码，不需要密码的话可以直接回车即可。<br>在ssh文件夹已经生成文件，如下<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/4feebc8139e922f319f2d0fc346bc0812623ba296b9eb92449895e58fe8d3b3edcdf14b2c4e9c3b36bce2435abbef9d6?pictype=scale&from=30013&version=3.3.3.3&uin=1062479924&fname=3.png&size=750" alt="3.png" title>
+                </div>
+                <div class="image-caption">3.png</div>
+            </figure></p>
 <h2 id="二、查看秘钥并放到Github账户"><a href="#二、查看秘钥并放到Github账户" class="headerlink" title="二、查看秘钥并放到Github账户"></a>二、查看秘钥并放到Github账户</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 查看秘钥</span><br><span class="line">cat id_rsa_test.pub</span><br><span class="line">cat id_rsa_test2.pub</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/0715106533a756de624c1e9559871af547ab2ec5180630594cc1acfd72d8bfb6d34720d433b67aec62cf42447bf5ac77?pictype=scale&from=30013&version=3.3.3.3&uin=1062479924&fname=4.png&size=750" alt="4.png" title>
+                </div>
+                <div class="image-caption">4.png</div>
+            </figure>
 <p>分别添加到两个github账户，详细步骤百度大大搜一搜哈</p>
 <h2 id="三、在ssh目录下创建config并配置"><a href="#三、在ssh目录下创建config并配置" class="headerlink" title="三、在ssh目录下创建config并配置"></a>三、在ssh目录下创建config并配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 创建config</span><br><span class="line">touch config</span><br><span class="line">// 查看当前目录</span><br><span class="line">ls</span><br><span class="line">// 编辑config</span><br><span class="line">vim config</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/ba1bccd4665fa952f2c0e3e94333055be9dba56b739faf5168e8f9a85060f1c1f07c39fcc496b8e1f956a3deaf8e3569?pictype=scale&from=30013&version=3.3.3.3&uin=1062479924&fname=5.png&size=750" alt="5.png" title>
+                </div>
+                <div class="image-caption">5.png</div>
+            </figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 配置github.com</span><br><span class="line">Host github.com    // 自定义域名地址</span><br><span class="line">    HostName github.com   // 真实域名地址</span><br><span class="line">    IdentityFile C:\Users\Admin\.ssh\id_rsa_test    // id_rsa位置</span><br><span class="line">    PreferredAuthentications publickey    // 权限验证</span><br><span class="line">    User username1    // 用户名</span><br><span class="line"></span><br><span class="line"># 配置git.github2.com </span><br><span class="line">Host github2.com </span><br><span class="line">    HostName github.com</span><br><span class="line">    IdentityFile C:\Users\Admin\.ssh\id_rsa_test2</span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line">    User username2</span><br></pre></td></tr></table></figure>
 <p>写入如上配置，域名和id_rsa位置要根据实际情况填写，然后保存即可。</p>
 <h2 id="四、测试是否配置成功"><a href="#四、测试是否配置成功" class="headerlink" title="四、测试是否配置成功"></a>四、测试是否配置成功</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 测试配置</span><br><span class="line">ssh -T git@github.com</span><br><span class="line">ssh -T git@github2.com</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/8f32a325199aa019f3a3e263be4c551ffd6a02a068778bd96b93591a215a079294a089f3331127decaae429c03cb64b6?pictype=scale&from=30013&version=3.3.3.3&uin=1062479924&fname=6.png&size=750" alt="6.png" title>
+                </div>
+                <div class="image-caption">6.png</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/9078712f12195af71e8522a8ea8da0fd81d3b968c6785e850598d0d019c0504d5bccad29c0ccd9b2fc7288f41b143657?pictype=scale&from=30013&version=3.3.3.3&uin=1062479924&fname=7.png&size=750" alt="7.png" title>
+                </div>
+                <div class="image-caption">7.png</div>
+            </figure>
 <p>出现上图所示，则表示成功啦~~</p>
 <h1 id="项目迁移"><a href="#项目迁移" class="headerlink" title="项目迁移"></a>项目迁移</h1><p>假如有个旧账号的项目要迁移到新账号，先把旧账号项目的代码克隆下来，在新账号新建个项目，在cmd添加远程仓库的ssh并命名为origin2,使用如下命令强制提交代码，就ok了，好嗨~<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin2 master -f</span><br></pre></td></tr></table></figure></p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="link1" alt="image" title>
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/6e89e2a896224317c4b529c3ff0afb4765260c74c95f32f3e145445e0f446bdec2e34e544a6f16c0704ec2471be934c9?pictype=scale&from=30013&version=3.3.3.3&uin=1062479924&fname=8.png&size=750" alt="8.png" title>
                 </div>
-                <div class="image-caption">image</div>
+                <div class="image-caption">8.png</div>
             </figure>
 
         </div>
@@ -216,7 +271,7 @@
     <div class="content">
         
 <span class="post-time">
-    最終更新：<time datetime="2019-06-25T02:16:54.364Z" itemprop="dateUpdated">2019-06-25 10:16:54</time>
+    Last updated: <time datetime="2019-06-25T03:01:42.028Z" itemprop="dateUpdated">2019-06-25 11:01:42</time>
 </span><br>
 
 
@@ -379,7 +434,7 @@
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
