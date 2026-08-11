@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="LLM、RAG、Agent/MCP 与 AI 全栈工程化知识库。" />
+    <title>AI 工程知识库 · Dennis Yan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" /><link rel="stylesheet" href="knowledge.css" />
+  </head>
+  <body class="knowledge-page">
+    <div class="noise"></div><div class="orb orb-a"></div>
+    <header class="nav shell"><a class="brand" href="index.html">D<span>/</span>Y</a><nav><a href="curriculum.html">学习路线</a><a class="active-nav" href="knowledge.html">知识库</a><a href="index.html#projects">项目实验室</a></nav><a class="nav-cta" href="curriculum.html">12 周计划 →</a></header>
+    <main class="shell">
+      <section class="knowledge-hero"><p class="eyebrow"><span class="pulse"></span> KNOWLEDGE BASE / V0.1</p><h1>能讲清，<br /><i>才能做对。</i></h1><p>面向 AI Agent / AI 全栈工程师的核心知识底座。每章从“是什么”讲到“怎么做”，最后用一个可交付的小任务验证理解。</p><div class="knowledge-progress"><span>4 个专题</span><span>17 个知识点</span><span>4 个最小项目</span></div></section>
+      <div class="knowledge-layout">
+        <aside class="toc"><p>目录</p><a href="#llm">01 / LLM 应用</a><a href="#rag">02 / RAG 工程化</a><a href="#agent">03 / Agent 与 MCP</a><a href="#product">04 / AI 全栈交付</a></aside>
+        <article class="lesson-content">
+          <section id="llm" class="lesson"><p class="chapter-no">01 / FOUNDATION</p><h2>LLM 应用：<br /><b>不是聊天框 API</b></h2><p class="intro">一个可用的 LLM 功能，至少要处理：输入意图、上下文、模型输出格式、流式状态、异常和成本。模型只是中间一环。</p>
+            <h3>核心概念</h3><div class="concept-grid"><div><b>Messages</b><p>系统指令决定边界；用户消息提供任务；历史消息提供上下文。不要把所有历史无限塞进去。</p></div><div><b>Streaming</b><p>边生成边展示，降低“等待感”；前端应支持取消、加载中与半截失败状态。</p></div><div><b>Structured output</b><p>让模型按 JSON Schema 输出，前端才能稳定地渲染卡片、表格或工作流。</p></div></div>
+            <h3>一次请求的正确路径</h3><div class="flow"><span>用户输入</span><i>→</i><span>服务端校验</span><i>→</i><span>模型调用</span><i>→</i><span>解析/校验</span><i>→</i><span>UI 呈现</span></div>
+            <h3>最小实现：服务端代理</h3><p>API Key 永远只放服务端环境变量；浏览器只调用自己的 <code>/api/chat</code>。</p><pre><code>// server route — 伪代码
+const response = await client.chat({
+  model: selectedModel,
+  messages,
+  stream: true,
+});
+return toTextStreamResponse(response);</code></pre>
+            <div class="pitfall"><b>常见坑：</b>直接把 Key 写进前端；默认相信模型返回的 JSON；不允许用户停止生成；没有记录耗时、模型与 token。</div>
+            <div class="practice"><span>动手验证</span><p>做一个流式聊天框：支持停止、错误提示、复制答案；日志中打印模型名、首字延迟和总耗时。</p></div>
+          </section>
+          <section id="rag" class="lesson"><p class="chapter-no">02 / RETRIEVAL</p><h2>RAG：让回答<br /><b>有根据</b></h2><p class="intro">RAG 不是“上传文件后问答”。它是把外部知识检索出来，再作为受控上下文交给模型回答的工程管线。</p>
+            <h3>完整链路</h3><div class="rag-flow"><span>原始文档</span><i>解析</i><span>Chunk</span><i>向量化</i><span>检索</span><i>重排序</i><span>带引用回答</span></div>
+            <h3>必须理解的 4 件事</h3><ol class="knowledge-list"><li><b>Chunk：</b>按标题/段落切分比机械按字数更容易保留语义；Chunk 太大噪声多，太小上下文不够。</li><li><b>Embedding：</b>把文本映射到向量空间，用于找“语义相近”的内容，不是让模型记住文档。</li><li><b>Hybrid search：</b>语义检索擅长同义表达，关键词检索擅长专有名词；实际系统常组合两者。</li><li><b>Rerank：</b>先用便宜检索召回候选，再用更强模型重排，提升最终上下文质量。</li></ol>
+            <h3>RAG 的最小伪代码</h3><pre><code>const chunks = await vectorStore.search(question, { topK: 12 });
+const context = await rerank(question, chunks).then(x =&gt; x.slice(0, 5));
+const answer = await model.generate({
+  prompt: `只依据以下资料回答；不知道就说不知道。\n${context}`
+});</code></pre>
+            <div class="pitfall"><b>常见坑：</b>没有来源引用；只测“回答好不好”却不测检索是否命中；遇到资料外问题时仍让模型猜。</div>
+            <div class="practice"><span>动手验证</span><p>拿 10 篇自己的技术文档，写 20 个问题。记录“检索是否命中”和“引用是否正确”，再优化分块与 Top-K。</p></div>
+          </section>
+          <section id="agent" class="lesson"><p class="chapter-no">03 / ORCHESTRATION</p><h2>Agent 与 MCP：<br /><b>模型开始行动</b></h2><p class="intro">Agent 是“模型 + 工具 + 状态 + 控制循环”。它适合需要分步骤、要调用外部系统的任务；简单问答不应硬上 Agent。</p>
+            <h3>Agent Loop</h3><div class="agent-loop"><span>目标</span><i>→</i><span>判断下一步</span><i>→</i><span>调用工具</span><i>→</i><span>读取结果</span><i>↺</i></div>
+            <h3>什么时候该用、什么时候别用</h3><table><thead><tr><th>适合 Agent</th><th>不适合 Agent</th></tr></thead><tbody><tr><td>多步骤研究、调用多个工具、执行过程需根据结果调整</td><td>固定表单处理、简单分类、单次知识库问答、要求绝对确定的流程</td></tr></tbody></table>
+            <h3>MCP 是什么</h3><p>MCP（Model Context Protocol）是一套让 AI 客户端以统一方式连接外部工具和数据的协议。你可以把它理解为 AI 世界的“标准插件接口”：客户端发现工具，服务端暴露工具描述和执行能力。</p>
+            <pre><code>// 一个好工具描述应包含
+name: "search_docs"
+input: { query: string, limit?: number }
+description: "搜索已授权的内部文档，返回标题、摘要和来源链接。"</code></pre>
+            <div class="pitfall"><b>安全底线：</b>工具权限最小化；涉及删除、发消息、付款等操作必须要求用户确认；不能让网页正文直接变成 Agent 指令。</div>
+            <div class="practice"><span>动手验证</span><p>做一个研究助手：可搜索资料、读取单篇内容、最后生成带来源的结论；在 UI 展示每一步工具调用。</p></div>
+          </section>
+          <section id="product" class="lesson"><p class="chapter-no">04 / SHIP</p><h2>AI 全栈交付：<br /><b>从 Demo 到产品</b></h2><p class="intro">AI 产品的难点不是“能调模型”，而是稳定、成本、权限、可观测性和体验在真实用户面前仍然成立。</p>
+            <h3>推荐架构</h3><div class="architecture"><span>React / Next 前端</span><i>→</i><span>API 层：鉴权、限流、模型路由</span><i>→</i><span>LLM / Tools / RAG</span><i>→</i><span>DB + 日志 + 评测</span></div>
+            <h3>上线前检查清单</h3><ul class="checklist"><li>密钥只存在环境变量；前端不出现供应商 Key。</li><li>流式、超时、取消、限流和模型失败都有用户可理解的状态。</li><li>记录请求 ID、模型、耗时、成本、工具调用和错误。</li><li>准备 20–50 条真实任务做回归评测；每次改 Prompt 或模型都跑一遍。</li><li>先让 3 位真实用户完成任务，再决定下一个功能。</li></ul>
+            <div class="practice"><span>最终作品</span><p>做一个垂直 AI 小工具，写完整 Case Study：用户问题、架构图、模型选择、评测集、结果、失败案例与下一步。</p></div>
+          </section>
+        </article>
+      </div>
+      <section class="next-step"><p class="num">NEXT STEP</p><h2>知识看完，去把它<br /><i>变成一个作品。</i></h2><a class="button primary" href="curriculum.html">打开 12 周项目计划 <span>→</span></a></section>
+    </main>
+    <footer class="shell"><span>© 2026 DENNIS YAN</span><span>LEARN · BUILD · SHARE</span></footer>
+  </body>
+</html>
