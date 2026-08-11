@@ -1,469 +1,76 @@
-<!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.8.0">
-    
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Dennis Yan 的 AI Agent 与 AI 全栈工程师学习站：路线、项目与实践笔记。" />
+    <meta name="theme-color" content="#070912" />
+    <meta property="og:title" content="DENNIS / AI ENGINEER" />
+    <meta property="og:description" content="AI Agent × Full-stack Engineer 学习站" />
+    <title>DENNIS / AI ENGINEER</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="noise"></div>
+    <div class="orb orb-a"></div><div class="orb orb-b"></div>
 
-    
+    <header class="nav shell">
+      <a class="brand" href="#top">D<span>/</span>Y</a>
+      <nav><a href="#roadmap">学习路线</a><a href="#projects">项目实验室</a><a href="#notes">笔记</a></nav>
+      <a class="nav-cta" href="https://github.com/zky-Luke" target="_blank" rel="noreferrer">GITHUB ↗</a>
+    </header>
 
-    
-
-
-
-    <meta charset="utf-8">
-    
-    
-    
-    
-    <title>Blog</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#3F51B5">
-    
-    
-    <meta name="keywords" content>
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Blog">
-<meta property="og:url" content="https://zky-luke.github.io/index.html">
-<meta property="og:site_name" content="Blog">
-<meta property="og:locale" content="zh-Hans">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Blog">
-    
-        <link rel="alternate" type="application/atom+xml" title="Blog" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/images/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
-
-    <!-- custom head -->
-    
-
-</head>
-
-<body>
-    <div id="loading" class="active"></div>
-
-    <aside id="menu">
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Dennis Yan</h5>
-          <a href="mailto:1062479924@qq.com" title="1062479924@qq.com" class="mail">1062479924@qq.com</a>
-        </hgroup>
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect active">
-              <a href="/">
-                <i class="icon icon-lg icon-home"></i>
-                Home
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives">
-                <i class="icon icon-lg icon-archives"></i>
-                Archives
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags">
-                <i class="icon icon-lg icon-tags"></i>
-                Tags
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/zky-Luke" target="_blank">
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://www.jianshu.com/u/74d1e2cb3a9e" target="_blank">
-                <i class="icon icon-lg icon-book"></i>
-                Jianshu
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about">
-                <i class="icon icon-lg icon-exclamation-circle"></i>
-                About
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">Blog</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
+    <main id="top">
+      <section class="hero shell">
+        <p class="eyebrow"><span class="pulse"></span> BUILDING IN PUBLIC · 2026</p>
+        <div class="hero-grid">
+          <div>
+            <h1>AI AGENT<br /><i>ENGINEER</i><br />IN PROGRESS.</h1>
+            <p class="lede">从高级前端开发者，进化为能把 <b>模型、检索、工具调用与产品体验</b>完整交付的 AI 全栈工程师。</p>
+            <div class="actions"><a class="button primary" href="#roadmap">探索学习地图 <span>↓</span></a><a class="button ghost" href="#projects">查看实验项目</a></div>
+          </div>
+          <aside class="signal-card">
+            <div class="card-head"><span>SYSTEM STATUS</span><span class="online">● ONLINE</span></div>
+            <div class="terminal"><p><em>›</em> identity</p><p class="out">AI Agent / Full-stack Engineer</p><p><em>›</em> current_focus</p><p class="out">RAG · MCP · Agent workflows</p><p><em>›</em> next_milestone</p><p class="out blink">ship useful AI products_</p></div>
+            <div class="meter"><span>LEARNING VELOCITY</span><b>86%</b><div><i></i></div></div>
+          </aside>
         </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header index-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">Blog</h1>
-        <h5 class="subtitle">
-            
-                
-            
-        </h5>
-    </div>
-
-    
-
-
-</header>
-
-<div class="container body-wrap">
-
-    <ul class="post-list">
-    
-        <li class="post-list-item fade">
-            <article id="post-Article1" class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-03-06 19:40:17" datetime="2019-03-06T11:40:17.000Z" itemprop="datePublished">2019-03-06</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/03/06/Article1/">SSH Git多账号配置 一分钟上手</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        使用介绍默认情况下，一台电脑只有一个SSH Key，假如我们有多个Github账号，需要将代码迁移账号，这时候这篇文章就派上用场啦~
-简单上手一、生成秘钥公钥装好Git后，桌面右键点击Git Bash进入Git界面，输入以下命令：12345//切换到ssh目录cd ~/.ssh//新建两个账户的ssh-keyssh-keygen -t rsa -C 10000@qq.comssh-keyge...
-    
-
-        <a href="/2019/03/06/Article1/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSH/">SSH</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-Article2" class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-12-27 19:44:55" datetime="2017-12-27T11:44:55.000Z" itemprop="datePublished">2017-12-27</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/12/27/Article2/">puppeteer新手入门(chromium下载跳坑)</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        puppeteer简介puppeteer 翻译是操纵木偶的人，利用这个工具，我们能做一个操纵页面的人。puppeteer是一个nodejs的库，支持调用Chrome的API来操纵Web，相比较Selenium或是PhantomJs,它最大的特点就是它的操作Dom可以完全在内存中进行模拟既在V8引擎中处理而不打开浏览器，而且关键是这个是Chrome团队在维护，会拥有更好的兼容性和前景。
-pup...
-    
-
-        <a href="/2017/12/27/Article2/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Chromium/">Chromium</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Puppeteer/">Puppeteer</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-Article3" class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-07-26 19:45:26" datetime="2017-07-26T11:45:26.000Z" itemprop="datePublished">2017-07-26</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/07/26/Article3/">Electron 快速入门及打包</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        一、初步理解简介Electron 可以让你使用纯 JavaScript 调用丰富的原生 APIs 来创造桌面应用。你可以把它看作是专注于桌面应用而不是 web 服务器的，io.js 的一个变体。这不意味着 Electron 是绑定了 GUI 库的 JavaScript。相反，Electron 使用 web 页面作为它的 GUI，所以你能把它看作成一个被 JavaScript 控制的，精简版的...
-    
-
-        <a href="/2017/07/26/Article3/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Electron/">Electron</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-Article4" class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-07-25 19:45:50" datetime="2017-07-25T11:45:50.000Z" itemprop="datePublished">2017-07-25</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/07/25/Article4/">构建自己的npm包 简单实现</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        NPM 使用介绍NPM是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种：
-
-允许用户从NPM服务器下载别人编写的第三方包到本地使用。
-允许用户从NPM服务器下载并安装别人编写的命令行程序到本地使用。
-允许用户将自己编写的包或命令行程序上传到NPM服务器供别人使用。
-
-NPM 包构建1、创建demo目录，新建index.js文件index...
-    
-
-        <a href="/2017/07/25/Article4/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NPM/">NPM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-    </ul>
-
-    
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style="display:none">
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style="display:none">
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
-            
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>Dennis Yan &copy; 2016 - 2019</span>
-            <span>
-                
-                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
-            </span>
-        </p>
-    </div>
-</footer>
-
+        <div class="ticker"><span>RETRIEVAL</span><span>ORCHESTRATION</span><span>TOOL USE</span><span>FRONTEND UX</span><span>EVALUATION</span></div>
+      </section>
+
+      <section id="roadmap" class="shell section">
+        <div class="section-top"><p class="num">01 / ROADMAP</p><h2>把“会用 AI”<br />变成<b>能造 Agent</b></h2><p>一条以作品为终点的路线。每一站都产出能演示、能复盘、能持续迭代的真实项目。</p></div>
+        <div class="roadmap">
+          <article class="step active"><span>01</span><h3>LLM 应用基础</h3><p>Prompt、结构化输出、流式交互、模型路由与成本控制。</p><small>NOW BUILDING</small></article>
+          <article class="step"><span>02</span><h3>RAG 工程化</h3><p>文档解析、向量检索、重排序、引用与知识库评测。</p><small>QUEUE</small></article>
+          <article class="step"><span>03</span><h3>Agent 系统</h3><p>工具调用、MCP、记忆、规划、多 Agent 协作与可观测性。</p><small>QUEUE</small></article>
+          <article class="step"><span>04</span><h3>产品化交付</h3><p>前后端、权限、部署、监控与 AI 体验设计，真正服务用户。</p><small>MISSION</small></article>
+        </div>
+      </section>
+
+      <section id="projects" class="shell section projects">
+        <div class="section-top compact"><p class="num">02 / LAB</p><h2>正在运行的<br /><b>实验项目</b></h2></div>
+        <div class="project-grid">
+          <a class="project featured" href="https://github.com/zky-Luke/zky-Luke.github.io" target="_blank" rel="noreferrer"><div class="project-code">01 — AGENT / RAG</div><h3>AI 学习操作系统</h3><p>把路线、知识、实验与复盘沉淀为一个可持续进化的个人工程系统。</p><div class="tags"><span>RAG</span><span>MCP</span><span>FULL-STACK</span></div><b>EXPLORE ↗</b></a>
+          <article class="project"><div class="project-code">02 — FRONTEND / AI</div><h3>可解释 AI 交互</h3><p>研究流式回答、引用溯源与 Agent 执行过程如何变得清晰可信。</p><div class="tags"><span>REACT</span><span>STREAMING</span></div></article>
+          <article class="project"><div class="project-code">03 — RESEARCH</div><h3>AI 工程实验日志</h3><p>记录模型、框架与工程取舍：什么有效，什么只是看起来酷。</p><div class="tags"><span>EVALS</span><span>NOTES</span></div></article>
+        </div>
+      </section>
+
+      <section id="notes" class="shell section notes">
+        <div class="section-top compact"><p class="num">03 / SIGNALS</p><h2>学习，不只是<br /><b>收藏链接</b></h2></div>
+        <div class="note-list">
+          <a href="#" aria-label="即将发布"><span>01</span><time>COMING SOON</time><strong>从前端到 AI 全栈：我的能力栈重构</strong><i>↗</i></a>
+          <a href="#" aria-label="即将发布"><span>02</span><time>COMING SOON</time><strong>一个可用 RAG 的最小工程闭环</strong><i>↗</i></a>
+          <a href="#" aria-label="即将发布"><span>03</span><time>COMING SOON</time><strong>为什么 Agent 产品的 UX 比提示词更重要</strong><i>↗</i></a>
+        </div>
+      </section>
+
+      <section class="closing shell"><p>ONE PERSON. ONE SYSTEM.</p><h2>持续学习，<br /><i>持续交付。</i></h2><a class="button primary" href="mailto:1062479924@qq.com">一起交流 <span>↗</span></a></section>
     </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zky-luke.github.io/&title=Blog&pic=https://zky-luke.github.io/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zky-luke.github.io/&title=Blog&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zky-luke.github.io/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Blog&url=https://zky-luke.github.io/&via=https://zky-luke.github.io" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zky-luke.github.io/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABw0lEQVR42u3aS27DMAwFwNz/0u42QFr7kbQUoxitDH9HXhAiqdcrHsfbeD/zefX9/OedyfkbBi4u7ph7nI7ze5L3/EVM3v/LlHBxcTdyzwNNEp7OKfnxhQ0XF/fB3GoIw8XF/d/cu9IbXFzc53OT5KcatvJgtyRXw8XFHXDzKuW64yX1XVxc3Bb3KI7eBPKAdfF1XFzcLdw8oFQnUJ1G3tzFxcXdw01wycOjdCX4Oi4u7h5ulTVZvuR/rrAiw8XFXcCdtEl6KdB80wYuLu5qbtI4SYjVDZ3VhAoXF/db3N4miXwbVjUIXiQ/uLi4y7h5YjOvtVSLLBf34OLiLub2mqB5+2TeWMXFxd3JjaomwQKlWlKpTh4XF3cnN7nQ21w1b7Je/DhcXNzF3PwD56Enb6+OEiRcXNyN3BVbMXpviHI1XFzcLdxJ8yNPaXppVX3BhouL2+f2ypd5K6UavAorLFxc3GXcaqliXYE1Ka3i4uLu5PaaqXctmJKCbCH64uLi3sqdpzq9e0a5Gi4u7mO4eak0fzZv8eLi4j6f20NMNmTg4uLu5FZbrUkAqiY50Q/CxcXdwu0VO/IJJMTCEgcXF3ct9wftMOIxIRmlkAAAAABJRU5ErkJggg==" alt="微信分享二维码">
-</div>
-
-
-
-
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
-</li>
-</template>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
-
-
-
-
-
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-
-
-</body>
+    <footer class="shell"><span>© 2026 DENNIS YAN</span><span>DESIGNED FOR THE AGENT ERA</span></footer>
+  </body>
 </html>
