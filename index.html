@@ -1,77 +1,13 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Dennis Yan 的 AI Agent 与 AI 全栈工程师学习站：路线、项目与实践笔记。" />
-    <meta name="theme-color" content="#070912" />
-    <meta property="og:title" content="DENNIS / AI ENGINEER" />
-    <meta property="og:description" content="AI Agent × Full-stack Engineer 学习站" />
-    <title>DENNIS / AI ENGINEER</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
+    <title>My Google AI Studio App</title>
   </head>
   <body>
-    <div class="noise"></div>
-    <div class="orb orb-a"></div><div class="orb orb-b"></div>
-
-    <header class="nav shell">
-      <a class="brand" href="#top">D<span>/</span>Y</a>
-      <nav><a href="curriculum.html">学习路线</a><a href="knowledge.html">知识库</a><a href="#projects">项目实验室</a><a href="curriculum.html#week-1">开始学习</a></nav>
-      <a class="nav-cta" href="https://github.com/zky-Luke" target="_blank" rel="noreferrer">GITHUB ↗</a>
-    </header>
-
-    <main id="top">
-      <section class="hero shell">
-        <p class="eyebrow"><span class="pulse"></span> BUILDING IN PUBLIC · 2026</p>
-        <div class="hero-grid">
-          <div>
-            <h1>AI AGENT<br /><i>ENGINEER</i><br />IN PROGRESS.</h1>
-            <p class="lede">从高级前端开发者，进化为能把 <b>模型、检索、工具调用与产品体验</b>完整交付的 AI 全栈工程师。</p>
-            <div class="actions"><a class="button primary" href="curriculum.html">进入 12 周学习计划 <span>→</span></a><a class="button ghost" href="#projects">查看实验项目</a></div>
-          </div>
-          <aside class="signal-card">
-            <div class="card-head"><span>SYSTEM STATUS</span><span class="online">● ONLINE</span></div>
-            <div class="terminal"><p><em>›</em> identity</p><p class="out">AI Agent / Full-stack Engineer</p><p><em>›</em> current_focus</p><p class="out">RAG · MCP · Agent workflows</p><p><em>›</em> next_milestone</p><p class="out blink">ship useful AI products_</p></div>
-            <div class="meter"><span>LEARNING VELOCITY</span><b>86%</b><div><i></i></div></div>
-          </aside>
-        </div>
-        <div class="ticker"><span>RETRIEVAL</span><span>ORCHESTRATION</span><span>TOOL USE</span><span>FRONTEND UX</span><span>EVALUATION</span></div>
-      </section>
-
-      <section id="roadmap" class="shell section">
-        <div class="section-top"><p class="num">01 / ROADMAP</p><h2>把“会用 AI”<br />变成<b>能造 Agent</b></h2><p>一条以作品为终点的路线。每一站都产出能演示、能复盘、能持续迭代的真实项目。</p></div>
-        <div class="roadmap">
-          <article class="step active"><span>01</span><h3>LLM 应用基础</h3><p>Prompt、结构化输出、流式交互、模型路由与成本控制。</p><small>NOW BUILDING</small></article>
-          <article class="step"><span>02</span><h3>RAG 工程化</h3><p>文档解析、向量检索、重排序、引用与知识库评测。</p><small>QUEUE</small></article>
-          <article class="step"><span>03</span><h3>Agent 系统</h3><p>工具调用、MCP、记忆、规划、多 Agent 协作与可观测性。</p><small>QUEUE</small></article>
-          <article class="step"><span>04</span><h3>产品化交付</h3><p>前后端、权限、部署、监控与 AI 体验设计，真正服务用户。</p><small>MISSION</small></article>
-        </div>
-        <a class="curriculum-link" href="curriculum.html">查看每周任务、交付物与验收标准 <span>→</span></a>
-      </section>
-
-      <section id="projects" class="shell section projects">
-        <div class="section-top compact"><p class="num">02 / LAB</p><h2>正在运行的<br /><b>实验项目</b></h2></div>
-        <div class="project-grid">
-          <a class="project featured" href="knowledge.html"><div class="project-code">01 — KNOWLEDGE / LAB</div><h3>AI 工程知识库</h3><p>从 LLM、RAG 到 Agent 与产品化：概念、最小实现、常见坑和练习都在这里。</p><div class="tags"><span>RAG</span><span>MCP</span><span>FULL-STACK</span></div><b>START LEARNING ↗</b></a>
-          <article class="project"><div class="project-code">02 — FRONTEND / AI</div><h3>可解释 AI 交互</h3><p>研究流式回答、引用溯源与 Agent 执行过程如何变得清晰可信。</p><div class="tags"><span>REACT</span><span>STREAMING</span></div></article>
-          <article class="project"><div class="project-code">03 — RESEARCH</div><h3>AI 工程实验日志</h3><p>记录模型、框架与工程取舍：什么有效，什么只是看起来酷。</p><div class="tags"><span>EVALS</span><span>NOTES</span></div></article>
-        </div>
-      </section>
-
-      <section id="notes" class="shell section notes">
-        <div class="section-top compact"><p class="num">03 / SIGNALS</p><h2>学习，不只是<br /><b>收藏链接</b></h2></div>
-        <div class="note-list">
-          <a href="#" aria-label="即将发布"><span>01</span><time>COMING SOON</time><strong>从前端到 AI 全栈：我的能力栈重构</strong><i>↗</i></a>
-          <a href="#" aria-label="即将发布"><span>02</span><time>COMING SOON</time><strong>一个可用 RAG 的最小工程闭环</strong><i>↗</i></a>
-          <a href="#" aria-label="即将发布"><span>03</span><time>COMING SOON</time><strong>为什么 Agent 产品的 UX 比提示词更重要</strong><i>↗</i></a>
-        </div>
-      </section>
-
-      <section class="closing shell"><p>ONE PERSON. ONE SYSTEM.</p><h2>持续学习，<br /><i>持续交付。</i></h2><a class="button primary" href="mailto:1062479924@qq.com">一起交流 <span>↗</span></a></section>
-    </main>
-    <footer class="shell"><span>© 2026 DENNIS YAN</span><span>DESIGNED FOR THE AGENT ERA</span></footer>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
+

@@ -1,0 +1,6 @@
+{
+  "name": "AI Engineering Lab",
+  "description": "12周 AI 工程师成长路径与全栈实战实验室，涵盖 LLM 基础、RAG 工程化、Agent 智能体与 MCP 协议",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
