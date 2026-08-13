@@ -17,7 +17,7 @@ export const PROJECTS_DATA: ProjectLabItem[] = [
       'Temperature & Top-P 随机度滑块',
       '支持 Markdown、数学公式与代码高亮',
     ],
-    techStack: ['React 19', 'Express', '@google/genai', 'SSE Stream', 'Tailwind CSS'],
+    techStack: ['React 19', 'Express', 'OpenRouter', 'SSE Stream', 'Tailwind CSS'],
   },
   {
     id: 'proj-personal-rag',
@@ -25,7 +25,7 @@ export const PROJECTS_DATA: ProjectLabItem[] = [
     tag: '向量检索 + RAG',
     difficulty: '中级',
     estimatedHours: '8 小时',
-    description: '在线上传/贴入文档，自定义 Chunk Size 与 Overlap 进行文本切块预览，实时计算相似度得分分值与相关度排名，并由 Gemini 生成附带准确引用的回答。',
+    description: '在线上传/贴入文档，自定义 Chunk Size 与 Overlap 进行文本切块预览，实时计算相似度得分分值与相关度排名，并由 Ling 生成附带准确引用的回答。',
     iconName: 'Database',
     badge: 'Stage 2 核心实战',
     demoType: 'rag',
@@ -35,7 +35,7 @@ export const PROJECTS_DATA: ProjectLabItem[] = [
       '带有原文引用的真实 LLM 生成回答',
       '支持关键词与向量混合检索 (Hybrid Search)',
     ],
-    techStack: ['Vector Matching', 'BM25', 'Gemini API', 'Recharts', 'Tailwind CSS'],
+    techStack: ['Vector Matching', 'BM25', 'OpenRouter API', 'Recharts', 'Tailwind CSS'],
   },
   {
     id: 'proj-research-assistant',
@@ -53,7 +53,7 @@ export const PROJECTS_DATA: ProjectLabItem[] = [
       '一键导出高质排版 PDF/Markdown 研究报告',
       '内置关键技术概念对比与代码实现说明',
     ],
-    techStack: ['Agent Architecture', 'ReAct Loop', 'Gemini 3.6 Flash', 'Markdown Engine'],
+    techStack: ['Agent Architecture', 'ReAct Loop', 'Ling 2.6 Flash', 'Markdown Engine'],
   },
   {
     id: 'proj-mcp-lab',

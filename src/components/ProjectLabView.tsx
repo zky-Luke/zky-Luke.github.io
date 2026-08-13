@@ -78,7 +78,7 @@ export const ProjectLabView: React.FC<ProjectLabViewProps> = ({ setActiveTab }) 
           <div className="flex items-center gap-2 shrink-0">
             <span className="rounded-xl border border-emerald-200 bg-emerald-50/60 px-4 py-2 text-xs font-bold text-emerald-700 dark:border-emerald-900/60 dark:bg-emerald-950/40 dark:text-emerald-300 flex items-center gap-1.5">
               <ShieldCheck className="h-4 w-4" />
-              <span>全量 Gemini 3.6 Flash 原生驱动</span>
+              <span>全量 Ling 2.6 Flash 原生驱动</span>
             </span>
           </div>
         </div>

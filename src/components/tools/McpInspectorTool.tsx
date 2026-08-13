@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiUrl } from '../../api';
 import { Cpu, Send, RefreshCw, Terminal, CheckCircle2, Play, Code } from 'lucide-react';
 
 export const McpInspectorTool: React.FC = () => {
@@ -19,7 +20,7 @@ export const McpInspectorTool: React.FC = () => {
           params: {
             name: 'calculate_token_cost',
             arguments: {
-              model: 'gemini-3.6-flash',
+              model: 'inclusionai/ling-2.6-flash',
               inputTokens: 150000,
               outputTokens: 25000,
             },
@@ -51,7 +52,7 @@ export const McpInspectorTool: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/mcp/simulate', {
+      const response = await fetch(apiUrl('/api/mcp/simulate'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ request: reqBody }),

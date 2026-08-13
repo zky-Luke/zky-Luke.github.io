@@ -231,7 +231,7 @@ export const KnowledgeView: React.FC<KnowledgeViewProps> = ({
               边读文章，边在实验室调测 MCP 与 Agent
             </h4>
             <p className="text-xs text-slate-600 dark:text-slate-400">
-              文章配套真实可运行的 JSON-RPC 报文抓包与 Gemini API 流式调用。
+              文章配套真实可运行的 JSON-RPC 报文抓包与 OpenRouter API 流式调用。
             </p>
             <button
               onClick={() => setActiveTab('project-lab')}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiUrl } from '../../api';
 import { Sparkles, FileText, CheckCircle2, Clock, RefreshCw, Copy, Check, ChevronRight } from 'lucide-react';
 
 export const ResearchAssistantTool: React.FC = () => {
@@ -20,7 +21,7 @@ export const ResearchAssistantTool: React.FC = () => {
     setReport(null);
 
     try {
-      const response = await fetch('/api/research', {
+      const response = await fetch(apiUrl('/api/research'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ topic, depth }),
@@ -30,7 +31,7 @@ export const ResearchAssistantTool: React.FC = () => {
       setReport(data.report || '生成报告失败');
     } catch (error) {
       console.error('Research Error:', error);
-      setReport('⚠️ 请求错误，请检查服务器 GEMINI_API_KEY 配置。');
+      setReport('⚠️ 请求错误，请检查服务器 OPENROUTER_API_KEY 配置。');
     } finally {
       setIsLoading(false);
     }

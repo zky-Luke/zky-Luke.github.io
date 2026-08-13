@@ -1,31 +1,32 @@
 import express from "express";
 import path from "path";
 import { createServer as createViteServer } from "vite";
-import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
+import { createOpenRouterClient, OPENROUTER_MODEL, parseOpenRouterSseEvent, type ChatMessage } from "./src/server/openrouter.js";
 
 dotenv.config();
 
-// Initialize Gemini Client safely
-const getGeminiClient = () => {
-  const apiKey = process.env.GEMINI_API_KEY;
+// Initialize OpenRouter Client safely
+const getOpenRouterClient = () => {
+  const apiKey = process.env.OPENROUTER_API_KEY;
   if (!apiKey) {
-    console.warn("GEMINI_API_KEY is not set in environment variables.");
+    console.warn("OPENROUTER_API_KEY is not set in environment variables.");
     return null;
   }
-  return new GoogleGenAI({
-    apiKey: apiKey,
-    httpOptions: {
-      headers: {
-        "User-Agent": "aistudio-build",
-      },
-    },
-  });
+  return createOpenRouterClient(apiKey);
 };
 
 async function startServer() {
   const app = express();
   const PORT = 3000;
+
+  app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    if (req.method === "OPTIONS") return res.sendStatus(204);
+    next();
+  });
 
   app.use(express.json({ limit: "10mb" }));
 
@@ -34,22 +35,22 @@ async function startServer() {
     res.json({ status: "ok", timestamp: new Date().toISOString() });
   });
 
-  // 1. Streaming / Standard Chat Endpoint with Gemini 3.6 Flash
+  // 1. Streaming / Standard Chat Endpoint with OpenRouter Ling 2.6 Flash
   app.post("/api/chat", async (req, res) => {
     try {
       const { messages, systemInstruction, temperature = 0.7, stream = true } = req.body;
-      const ai = getGeminiClient();
+      const ai = getOpenRouterClient();
 
       if (!ai) {
         return res.status(500).json({
-          error: "GEMINI_API_KEY Missing",
-          message: "请在 Secrets 面板配置 GEMINI_API_KEY",
+          error: "OPENROUTER_API_KEY Missing",
+          message: "请在 Secrets 面板配置 OPENROUTER_API_KEY",
         });
       }
 
-      const formattedContents = messages.map((m: { role: string; content: string }) => ({
-        role: m.role === "user" ? "user" : "model",
-        parts: [{ text: m.content }],
+      const formattedMessages: ChatMessage[] = messages.map((m: { role: string; content: string }) => ({
+        role: m.role === "user" ? "user" : "assistant",
+        content: m.content,
       }));
 
       if (stream) {
@@ -57,33 +58,37 @@ async function startServer() {
         res.setHeader("Cache-Control", "no-cache");
         res.setHeader("Connection", "keep-alive");
 
-        const responseStream = await ai.models.generateContentStream({
-          model: "gemini-3.6-flash",
-          contents: formattedContents,
-          config: {
-            systemInstruction: systemInstruction || "你是一位专业的 AI 工程导师，擅长解答 LLM、RAG、Agent 和 MCP 相关的技术问题。语言简炼、逻辑清晰、输出高质量 Markdown。",
-            temperature: Number(temperature),
-          },
+        const responseStream = await ai.generateTextStream({
+          messages: formattedMessages,
+          systemInstruction: systemInstruction || "你是一位专业的 AI 工程导师，擅长解答 LLM、RAG、Agent 和 MCP 相关的技术问题。语言简炼、逻辑清晰、输出高质量 Markdown。",
+          temperature: Number(temperature),
         });
 
-        for await (const chunk of responseStream) {
-          if (chunk.text) {
-            res.write(`data: ${JSON.stringify({ text: chunk.text })}\n\n`);
+        if (!responseStream.body) throw new Error("OpenRouter returned an empty stream");
+        const reader = responseStream.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = "";
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const events = buffer.split("\n\n");
+          buffer = events.pop() || "";
+          for (const event of events) {
+            const parsed = parseOpenRouterSseEvent(event);
+            if (parsed.text) res.write(`data: ${JSON.stringify({ text: parsed.text })}\n\n`);
           }
         }
         res.write("data: [DONE]\n\n");
         res.end();
       } else {
-        const response = await ai.models.generateContent({
-          model: "gemini-3.6-flash",
-          contents: formattedContents,
-          config: {
-            systemInstruction: systemInstruction || "你是一位专业的 AI 工程导师，擅长解答 LLM、RAG、Agent 和 MCP 相关的技术问题。",
-            temperature: Number(temperature),
-          },
+        const text = await ai.generateText({
+          messages: formattedMessages,
+          systemInstruction: systemInstruction || "你是一位专业的 AI 工程导师，擅长解答 LLM、RAG、Agent 和 MCP 相关的技术问题。",
+          temperature: Number(temperature),
         });
 
-        res.json({ text: response.text || "无响应" });
+        res.json({ text });
       }
     } catch (error: any) {
       console.error("Chat Error:", error);
@@ -97,12 +102,12 @@ async function startServer() {
   app.post("/api/research", async (req, res) => {
     try {
       const { topic, depth = "deep" } = req.body;
-      const ai = getGeminiClient();
+      const ai = getOpenRouterClient();
 
       if (!ai) {
         return res.status(500).json({
-          error: "GEMINI_API_KEY Missing",
-          message: "请配置 GEMINI_API_KEY 以生成研究报告",
+          error: "OPENROUTER_API_KEY Missing",
+          message: "请配置 OPENROUTER_API_KEY 以生成研究报告",
         });
       }
 
@@ -118,15 +123,12 @@ async function startServer() {
 
 请使用 Markdown 格式渲染，结构分明，包含代码块与对比表格。`;
 
-      const response = await ai.models.generateContent({
-        model: "gemini-3.6-flash",
-        contents: prompt,
-        config: {
-          temperature: 0.4,
-        },
+      const report = await ai.generateText({
+        messages: [{ role: "user", content: prompt }],
+        temperature: 0.4,
       });
 
-      res.json({ report: response.text });
+      res.json({ report });
     } catch (error: any) {
       console.error("Research Error:", error);
       res.status(500).json({ error: error.message || "Failed to generate research report" });
@@ -137,7 +139,7 @@ async function startServer() {
   app.post("/api/rag/search", async (req, res) => {
     try {
       const { query, documents = [], chunkSize = 300, topK = 3 } = req.body;
-      const ai = getGeminiClient();
+      const ai = getOpenRouterClient();
 
       // Simple client side chunking simulation
       const chunks: { id: string; text: string; source: string; score: number }[] = [];
@@ -181,14 +183,11 @@ ${query}
 
 请在回答中标注引用来源，如 [引用文档 1]。`;
 
-        const response = await ai.models.generateContent({
-          model: "gemini-3.6-flash",
-          contents: ragPrompt,
+        ragAnswer = await ai.generateText({
+          messages: [{ role: "user", content: ragPrompt }],
         });
-
-        ragAnswer = response.text || "无法生成回答";
       } else {
-        ragAnswer = `[模拟 RAG 回答]: 根据检索到的 ${retrievedChunks.length} 个相关分块，关于 "${query}" 的回答已提取上下文。请配置 GEMINI_API_KEY 以体验实时 LLM 合成。`;
+        ragAnswer = `[模拟 RAG 回答]: 根据检索到的 ${retrievedChunks.length} 个相关分块，关于 "${query}" 的回答已提取上下文。请配置 OPENROUTER_API_KEY 以体验实时 LLM 合成。`;
       }
 
       res.json({
@@ -220,7 +219,7 @@ ${query}
               inputSchema: {
                 type: "object",
                 properties: {
-                  model: { type: "string", description: "模型名称，如 gemini-3.6-flash" },
+                  model: { type: "string", description: `模型名称，如 ${OPENROUTER_MODEL}` },
                   inputTokens: { type: "number", description: "输入 Token 数量" },
                   outputTokens: { type: "number", description: "输出 Token 数量" },
                 },
@@ -250,7 +249,7 @@ ${query}
               {
                 type: "text",
                 text: JSON.stringify({
-                  model: args.model || "gemini-3.6-flash",
+                  model: args.model || OPENROUTER_MODEL,
                   inputTokens: args.inputTokens,
                   outputTokens: args.outputTokens,
                   estimatedCostUSD: `$${(inCost + outCost).toFixed(6)}`,
@@ -319,7 +318,7 @@ ${query}
   }
 
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`AI Engineering Lab Server listening on http://0.0.0.0:${PORT}`);
+    console.log(`AI Engineering Lab Server listening on http://localhost:${PORT}/`);
   });
 }
 

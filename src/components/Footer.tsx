@@ -24,7 +24,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab }) => {
             </p>
             <div className="flex items-center gap-2 text-xs text-indigo-400">
               <Terminal className="h-3.5 w-3.5" />
-              <span>Powered by Gemini 3.6 Flash & @google/genai</span>
+              <span>Powered by OpenRouter · Ling 2.6 Flash</span>
             </div>
           </div>
 

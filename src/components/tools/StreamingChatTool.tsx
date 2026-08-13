@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { apiUrl } from '../../api';
 import { Send, Bot, User, RefreshCw, Sliders, Sparkles, Trash2 } from 'lucide-react';
 
 export const StreamingChatTool: React.FC = () => {
@@ -40,7 +41,7 @@ export const StreamingChatTool: React.FC = () => {
     setMessages((prev) => [...prev, { role: 'assistant', content: '' }]);
 
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch(apiUrl('/api/chat'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -120,7 +121,7 @@ export const StreamingChatTool: React.FC = () => {
           </div>
           <div>
             <h3 className="font-bold text-sm text-slate-900 dark:text-white">流式 AI 聊天 Playground (SSE)</h3>
-            <p className="text-[11px] text-slate-500">Gemini 3.6 Flash · Server-Sent Events 流式打字机</p>
+            <p className="text-[11px] text-slate-500">Ling 2.6 Flash · Server-Sent Events 流式打字机</p>
           </div>
         </div>
 

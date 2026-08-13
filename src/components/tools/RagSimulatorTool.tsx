@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiUrl } from '../../api';
 import { Database, Scissors, Search, Sparkles, CheckCircle2, Layers, RefreshCw } from 'lucide-react';
 
 export const RagSimulatorTool: React.FC = () => {
@@ -15,7 +16,7 @@ export const RagSimulatorTool: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/rag/search', {
+      const response = await fetch(apiUrl('/api/rag/search'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
