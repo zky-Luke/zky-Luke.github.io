@@ -1,0 +1,15 @@
+services:
+  service-backend:
+    build: .
+    container_name: service-backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "127.0.0.1:6002:3000"
+    mem_limit: 512m
+    memswap_limit: 768m
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
