@@ -1,4 +1,9 @@
-export const OPENROUTER_MODEL = "inclusionai/ling-2.6-flash";
+const DEFAULT_OPENROUTER_MODEL = "inclusionai/ling-2.6-flash";
+
+export const getOpenRouterModel = (env: NodeJS.ProcessEnv = process.env) =>
+  env.OPENROUTER_MODEL || DEFAULT_OPENROUTER_MODEL;
+
+export const OPENROUTER_MODEL = getOpenRouterModel();
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 
 export type ChatMessage = {
